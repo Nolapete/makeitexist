@@ -1,0 +1,4 @@
+# Ignore Javascript and CSS files that are part of third-party libraries
+# The following path is an example. Adjust as needed for your project.
+static/js/vendor/* linguist-vendored
+static/css/vendor/* linguist-vendored
