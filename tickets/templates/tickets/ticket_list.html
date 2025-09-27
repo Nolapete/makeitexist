@@ -1,0 +1,16 @@
+{% load static %}
+<h1>Your Tickets</h1>
+<a href="{% url 'create_ticket' %}" class="btn btn-primary mb-3">Create New Ticket</a>
+
+<div class="accordion-container">
+    {% for ticket in tickets %}
+        <details>
+            <summary><a href="{% url 'ticket_detail' ticket.pk %}">{{ ticket.title }}</a> </summary>
+            <div class="content">
+                {{ ticket.get_priority_display }} 
+                Last updated: {{ ticket.updated_at|date:"Y-m-d H:i" }}
+            </div>
+        </details>
+    {% empty %}
+        <li>No tickets found.</li>
+    {% endfor %}

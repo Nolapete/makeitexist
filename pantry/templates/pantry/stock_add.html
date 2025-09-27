@@ -1,0 +1,93 @@
+{% extends "pantry/base.html" %}
+
+{% block title %}Add Stock{% endblock %}
+
+{% block content %}
+<h2>➕ Add Stock</h2>
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags|default:"info" }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+
+  <!-- Item Selection -->
+  <div class="mb-3">
+    <label for="id_item" class="form-label">Item *</label>
+    <select class="form-select" name="item_pk" id="id_item" required>
+      <option value="" disabled {% if not item %}selected{% endif %}>Choose an item...</option>
+      {% for i in items %}
+        <option value="{{ i.pk }}"
+                {% if item and item.pk == i.pk %}selected{% endif %}>
+          {{ i.name }}
+          {% if i.category %}({{ i.category.name }}){% endif %}
+        </option>
+      {% endfor %}
+    </select>
+    <div class="form-text">
+      Can't find the item? Add it in <a href="#">Pantry Items</a>.
+    </div>
+  </div>
+
+  <!-- Storage Unit Selection -->
+  <div class="mb-3">
+    <label for="id_unit" class="form-label">Storage Unit *</label>
+    <select class="form-select" name="unit_pk" id="id_unit" required>
+      <option value="" disabled {% if not unit %}selected{% endif %}>Choose a location...</option>
+      {% regroup units by location as unit_locations %}
+      {% for loc in unit_locations %}
+        <optgroup label="{{ loc.grouper.name }}">
+          {% for u in loc.list %}
+            <option value="{{ u.pk }}"
+                    {% if unit and unit.pk == u.pk %}selected{% endif %}>
+              {% if u.unit_type == 'freezer' %}❄️
+              {% elif u.unit_type == 'refrigerator' %}🧊
+              {% elif u.unit_type == 'pantry' %}🍞
+              {% elif u.unit_type == 'cabinet' %}🛞
+              {% elif u.unit_type == 'closet' %}🗄️
+              {% endif %}
+              {{ u.name }} ({{ u.get_unit_type_display }})
+            </option>
+          {% endfor %}
+        </optgroup>
+      {% endfor %}
+    </select>
+  </div>
+
+  <!-- Quantity -->
+  <div class="mb-3">
+    <label for="id_quantity" class="form-label">Quantity *</label>
+    <input type="number" class="form-control" name="quantity" id="id_quantity"
+           value="{{ quantity|default:'' }}" min="1" required>
+    <div class="form-text">How many units are you adding?</div>
+  </div>
+
+  <!-- Expiry Date -->
+  <div class="mb-3">
+    <label for="id_expiry" class="form-label">Expiry Date (Optional)</label>
+    <input type="date" class="form-control" name="expiry_date" id="id_expiry"
+           value="{{ expiry|default:'' }}">
+    <div class="form-text">Leave blank if item doesn't expire (e.g., salt, sugar).</div>
+  </div>
+
+  <!-- Submit Buttons -->
+  <div class="d-flex gap-2">
+    <button type="submit" class="btn btn-success">Add Stock</button>
+    <a href="{% url 'pantry:location_list' %}" class="btn btn-secondary">Cancel</a>
+  </div>
+</form>
+
+<!-- Optional: Link to add new item if missing -->
+<div class="mt-3">
+  <small class="text-muted">
+    Need to add a new item? <a href="#">Create New Pantry Item</a>.
+  </small>
+</div>
+
+{% endblock %}   

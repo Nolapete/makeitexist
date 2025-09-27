@@ -1,0 +1,38 @@
+{% extends "pantry/base.html" %}
+
+{% block title %}My Locations{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Your Pantry Locations</h2>
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+{% if locations %}
+  <div class="list-group">
+    {% for loc in locations %}
+      <a href="{% url 'pantry:location_detail' loc.pk %}" class="list-group-item list-group-item-action">
+        <h5>{{ loc.name }}</h5>
+        {% if loc.address %}
+          <small class="text-muted">{{ loc.address }}</small>
+        {% endif %}
+        <span class="badge bg-primary float-end">{{ loc.storage_units.count }} units</span>
+      </a>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="text-muted">You haven't added any locations yet.</p>
+{% endif %}
+
+<div class="mt-4">
+  <a href="{% url 'pantry:location_create' %}" class="btn btn-success">
+    ➕ Add New Location
+  </a>
+</div>
+
+{% endblock %}   

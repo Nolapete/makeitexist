@@ -1,0 +1,44 @@
+
+{% extends "base.html" %}
+
+{% block title %}Delete {{ unit.get_unit_type_display }}{% endblock %}
+
+{% block content %}
+<h2>Delete Storage Unit</h2>
+
+<p>
+  <strong>Are you sure you want to delete:</strong>
+</p>
+
+<div class="alert alert-danger">
+  <strong>
+    {% if unit.unit_type == 'freezer' %} ❄️
+    {% elif unit.unit_type == 'refrigerator' %} 🧊
+    {% elif unit.unit_type == 'pantry' %} 🍞
+    {% elif unit.unit_type == 'cabinet' %} 🛞
+    {% elif unit.unit_type == 'closet' %} 🗄️
+    {% endif %}
+    {{ unit.get_unit_type_display }}: "{{ unit.name }}"
+  </strong>
+  <br>
+  <small>Located in: <em>{{ unit.location.name }}</em></small>
+</div>
+
+<p class="text-danger">
+  <strong>This action will also delete all stock items stored inside this unit.</strong>
+  This cannot be undone.
+</p>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Yes, Delete Permanently</button>
+  <a href="{% url 'pantry:storage_unit_detail' unit.pk %}" class="btn btn-secondary">Cancel</a>
+</form>
+
+<hr class="my-4">
+
+<a href="{% url 'pantry:location_detail' unit.location.pk %}" class="btn btn-sm btn-link">
+  ← Back to {{ unit.location.name }}
+</a>
+
+{% endblock %}   

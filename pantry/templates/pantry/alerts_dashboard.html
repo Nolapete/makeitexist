@@ -1,0 +1,129 @@
+<!-- templates/pantry/alerts_dashboard.html -->
+{% extends "base.html" %}
+
+{% block title %}Alerts & Notifications{% endblock %}
+
+{% block content %}
+<h2>⚠️ Pantry Alerts</h2>
+<p class="text-muted">Stay on top of expirations and stock levels.</p>
+
+<hr>
+
+<!-- Expiring Soon -->
+{% if expiring_soon %}
+<div class="mb-5">
+  <h4 class="text-warning">
+    <i class="fas fa-clock me-2 d-none"></i> {# Optional: Font Awesome #}
+    Expiring Soon (Within 7 Days)
+  </h4>
+  <div class="list-group">
+    {% for stock in expiring_soon %}
+      <div class="list-group-item">
+        <div class="d-flex justify-content-between">
+          <div>
+            <strong>{{ stock.item.name }}</strong>
+            <div class="text-muted small">
+              {{ stock.quantity }} unit{{ stock.quantity|pluralize }} in
+              <em>{{ stock.storage_unit.name }}</em>
+              (expires {{ stock.expiry_date }})
+            </div>
+          </div>
+          <div class="text-end">
+            <span class="badge bg-warning text-dark">
+              {{ stock.days_until_expiry }} day{{ stock.days_until_expiry|pluralize }} left
+            </span>
+            <div class="mt-1">
+              <a href="{% url 'pantry:storage_unit_detail' stock.storage_unit.pk %}" class="btn btn-sm btn-outline-warning">Review</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<!-- Out of Stock -->
+{% if out_of_stock %}
+<div class="mb-5">
+  <h4 class="text-danger">
+    <i class="fas fa-box-open me-2 d-none"></i>
+    Out of Stock
+  </h4>
+  <div class="list-group">
+    {% for item in out_of_stock %}
+      <div class="list-group-item">
+        <div class="d-flex justify-content-between">
+          <div>
+            <strong>{{ item.name }}</strong>
+            <div class="text-muted small">Minimum level: {{ item.min_stock_level }}</div>
+          </div>
+          <div class="text-end">
+            <span class="badge bg-danger">Missing</span>   
+                      <div class="text-end">
+            <span class="badge bg-danger">Missing</span>
+            <div class="mt-1">
+              <a href="{% url 'pantry:stock_add' %}?item={{ item.id }}" class="btn btn-sm btn-outline-danger">
+                Restock
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<!-- Low Stock (Below Min Level) -->
+{% if low_stock %}
+<div class="mb-5">
+  <h4 class="text-orange" style="color: #fd7e14;">
+    <i class="fas fa-exclamation-triangle me-2 d-none"></i>
+    Low Stock
+  </h4>
+  <div class="list-group">
+    {% for item in low_stock %}
+      {% with item.stocks.first as stock %} {# Simplified: show one unit #}
+        <div class="list-group-item">
+          <div class="d-flex justify-content-between">
+            <div>
+              <strong>{{ item.name }}</strong>
+              <div class="text-muted small">
+                Has {{ stock.quantity }} (needs {{ item.min_stock_level }}), 
+                stored in <em>{{ stock.storage_unit.name }}</em>
+              </div>
+            </div>
+            <div class="text-end">
+              <span class="badge bg-warning text-dark">Low</span>
+              <div class="mt-1">
+                <a href="{% url 'pantry:stock_add' %}?item={{ item.id }}&unit={{ stock.storage_unit.id }}" 
+                   class="btn btn-sm btn-outline-warning">
+                  Add More
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endwith %}
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<!-- No Alerts -->
+{% if not expiring_soon and not out_of_stock and not low_stock %}
+<div class="text-center py-5">
+  <i class="fas fa-check-circle" style="font-size: 4rem; color: green;"></i>
+  <h3 class="mt-3 text-success">All Clear! 🎉</h3>
+  <p class="text-muted">No expiring or low stock items found.</p>
+</div>
+{% endif %}
+
+<!-- Back Link -->
+<div class="mt-4">
+  <a href="{% url 'pantry:location_list' %}" class="btn btn-primary">← Back to Pantry</a>
+</div>
+
+{% endblock %}   
+

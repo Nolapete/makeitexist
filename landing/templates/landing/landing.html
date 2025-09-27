@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>makeitexist.net</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <!-- Parallax Section: Hero -->
+    <div class="parallax-group parallax-1">
+        <img class="parallax-img" src="{% static 'images/make it good later.jpg' %}" alt="make it good later">
+        <div class="parallax-layer middle-layer"></div>
+        <div class="parallax-layer foreground-layer">
+            <h1>makeitexist.net</h1>
+            <p>Bringing your ideas to life. <br> "Just make it exist first. You can make it good later."</p>
+        </div>
+    </div>
+
+    <!-- makeitexist.net apps Section -->
+    <div class="content-section">
+        <div class="container">
+            <h2 class="domain-header">Our Core Apps</h2>
+            <div class="card-grid">
+                {% for project in makeitexist_apps %}
+                    <div class="project-card{% if project.is_featured %} is-featured{% endif %}">
+                        <div class="card-header-text">
+                            <h3>{{ project.title }}</h3>
+                            {% if project.display_domain %}
+                                <a href="{{ project.project_url }}" target="_blank" class="card-domain-link">{{ project.display_domain }}</a>
+                            {% endif %}
+                        </div>
+                        <div class="card-image-frame">
+                            <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                        </div>
+                        <p>{{ project.description }}</p>
+                        <div class="tech-stack-container">
+                            <div class="tech-icons">
+                                {% for icon_class in project.get_tech_icons %}
+                                    <i class="{{ icon_class }}"></i>
+                                {% endfor %}
+                            </div>
+                            <p class="technologies-text">{{ project.technologies }}</p>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>No `makeitexist` projects yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+   <!-- Parallax Section 2 -->
+<div class="parallax-group parallax-2 short-parallax">
+    <div class="parallax-layer foreground-layer">
+        <h2>Other Creative Projects</h2>
+    </div>
+</div>
+
+    <!-- External projects Section -->
+    <div class="content-section">
+        <div class="container">
+            <div class="card-grid">
+                {% for project in external_projects %}
+                    <div class="project-card{% if project.is_featured %} is-featured{% endif %}">
+                        <div class="card-header-text">
+                            <h3>{{ project.title }}</h3>
+                            {% if project.display_domain %}
+                                <a href="{{ project.project_url }}" target="_blank" class="card-domain-link">{{ project.display_domain }}</a>
+                            {% endif %}
+                        </div>
+                        <div class="card-image-frame">
+                            <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                        </div>
+                        <p>{{ project.description }}</p>
+                        <div class="tech-stack-container">
+                            <div class="tech-icons">
+                                {% for icon_class in project.get_tech_icons %}
+                                    <i class="{{ icon_class }}"></i>
+                                {% endfor %}
+                            </div>
+                            <p class="technologies-text">{{ project.technologies }}</p>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>No other projects to display.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Parallax Section 3: Contact -->
+<div class="parallax-group parallax-3 short-parallax">
+    <div class="parallax-layer foreground-layer">
+        <h2>Let's collaborate.</h2>
+    </div>
+</div>
+
+<!-- NEW: Staff Cards Section -->
+<div class="content-section">
+    <div class="container">
+        <h2 class="domain-header">Our Team</h2>
+        <div class="card-grid">
+            {% for staff in staff_members %}
+            <div class="project-card staff-card">
+                {% if staff.photo %}
+                    <div class="card-image-frame staff-photo-frame">
+                        <img src="{{ staff.photo.url }}" alt="{{ staff.name }}">
+                    </div>
+                {% endif %}
+                <h3>{{ staff.name }}</h3>
+                <div class="staff-contact-info">
+                    <p class="staff-email"><i class="fas fa-envelope"></i> <a href="mailto:{{ staff.email }}">{{ staff.email }}</a></p>
+                    <p class="staff-phone"><i class="fas fa-phone"></i> <a href="tel:{{ staff.phone }}">{{ staff.phone }}</a></p>
+                </div>
+                {% if staff.bio %}
+                    <p class="staff-bio">{{ staff.bio }}</p>
+                {% endif %}
+            </div>
+            {% empty %}
+                <p>No staff members to display.</p>            
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Footer section -->
+<footer class="site-footer">
+    <div class="container">
+        <p>
+            Smoke texture by <a href="https://www.vecteezy.com/" target="_blank" rel="noopener noreferrer">Vecteezy</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

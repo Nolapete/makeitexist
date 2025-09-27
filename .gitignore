@@ -1,0 +1,50 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Django-specific files
+*.log
+*.pot
+db.sqlite3  # Default SQLite database file
+/media/      # User-uploaded media files
+/static/     # Collected static files (can be uncommented if you use a build process)
+
+# Virtual environment
+# Ignore the virtual environment folder to keep it out of version control.
+# Common names include:
+env/
+venv/
+.venv/
+
+# Environment variables
+# This file contains sensitive information like API keys and database passwords.
+.env
+
+# IDE-specific files and folders
+# Visual Studio Code
+.vscode/
+# PyCharm
+.idea/
+
+# Operating System files
+# Windows
+Thumbs.db
+# macOS
+.DS_Store
+
+# Test and coverage files
+.coverage
+htmlcov/
+.tox/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Distribution / packaging
+# Ignore build artifacts and distribution files
+build/
+dist/
+*.egg-info/

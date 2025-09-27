@@ -1,0 +1,83 @@
+<!-- templates/pantry/stock_form.html -->
+{% extends "base.html" %}
+
+{% block title %}Edit Stock: {{ stock.item.name }}{% endblock %}
+
+{% block content %}
+<h2>✏️ Edit Stock</h2>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title">{{ stock.item.name }}</h5>
+    <table class="table table-sm table-borderless">
+      <tr>
+        <th>Storage:</th>
+        <td>
+          {% if stock.storage_unit.unit_type == 'freezer' %} ❄️
+          {% elif stock.storage_unit.unit_type == 'refrigerator' %} 🧊
+          {% elif stock.storage_unit.unit_type == 'pantry' %} 🍞
+          {% elif stock.storage_unit.unit_type == 'cabinet' %} 🛞
+          {% elif stock.storage_unit.unit_type == 'closet' %} 🗄️
+          {% endif %}
+          <strong>{{ stock.storage_unit.name }}</strong>
+          ({{ stock.storage_unit.get_unit_type_display }} in {{ stock.storage_unit.location.name }})
+        </td>
+      </tr>
+      <tr>
+        <th>Current Quantity:</th>
+        <td>{{ stock.quantity }}</td>
+      </tr>
+      <tr>
+        <th>Current Expiry:</th>
+        <td>{{ stock.expiry_date|default:"No expiry set" }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags|default:"info" }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+
+  <!-- Quantity -->
+  <div class="mb-3">
+    <label for="id_quantity" class="form-label">New Quantity *</label>
+    <input type="number" class="form-control" name="quantity" id="id_quantity"
+           value="{{ stock.quantity }}" min="0" required>
+    <div class="form-text">Set to 0 if item is now out of stock.</div>
+  </div>
+
+  <!-- Expiry Date -->
+  <div class="mb-3">
+    <label for="id_expiry" class="form-label">New Expiry Date</label>
+    <input type="date" class="form-control" name="expiry_date" id="id_expiry"
+           value="{{ stock.expiry_date|date:'Y-m-d' }}"">
+    <div class="form-text">Leave blank if item doesn't expire.</div>
+  </div>
+
+  <!-- Submit Buttons -->
+  <div class="d-flex gap-2">
+    <button type="submit" class="btn btn-primary">Update Stock</button>
+    <a href="{% url 'pantry:storage_unit_detail' stock.storage_unit.pk %}" class="btn btn-secondary">Cancel</a>
+    <a href="{% url 'pantry:stock_delete' stock.pk %}" class="btn btn-danger ms-auto">Delete</a>
+  </div>
+</form>
+
+<hr class="my-4">
+
+<!-- Link Back -->
+<div>
+  <a href="{% url 'pantry:storage_unit_detail' stock.storage_unit.pk %}" class="text-decoration-none">
+    ← Back to {{ stock.storage_unit.name }}
+  </a>
+</div>
+
+{% endblock %}   

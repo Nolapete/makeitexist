@@ -1,0 +1,12 @@
+<h1>{{ ticket.title }}</h1>
+<p><strong>Description:</strong> {{ ticket.description }}</p>
+<p><strong>Priority:</strong> {{ ticket.get_priority_display }}</p>
+<p><strong>Status:</strong> {{ ticket.get_status_display }}</p>
+<p><strong>Created At:</strong> {{ ticket.created_at|date:"Y-m-d H:i" }}</p>
+<p><strong>Last Updated:</strong> {{ ticket.updated_at|date:"Y-m-d H:i" }}</p>
+<p><strong>Assigned To:</strong> {{ ticket.assigned_to.username|default:"Unassigned" }}</p>
+<p><strong>Created By:</strong> {{ ticket.created_by.username }}</p>
+<a href="{% url 'ticket_list' %}" class="btn btn-secondary mt-3">Back to Ticket List</a>
+<a href="{% url 'create_ticket' %}" class="btn btn-primary mt-3">Create New Ticket</a>
+
+
