@@ -7,23 +7,27 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pantry', '0003_alter_pantryitem_created_by'),
+        ("pantry", "0003_alter_pantryitem_created_by"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='stock',
-            name='batch_number',
+            model_name="stock",
+            name="batch_number",
             field=models.CharField(blank=True, max_length=100, null=True),
         ),
         migrations.AlterField(
-            model_name='stock',
-            name='quantity',
+            model_name="stock",
+            name="quantity",
             field=models.PositiveIntegerField(),
         ),
         migrations.AlterField(
-            model_name='stock',
-            name='storage_unit',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='stocks', to='pantry.storageunit'),
+            model_name="stock",
+            name="storage_unit",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="stocks",
+                to="pantry.storageunit",
+            ),
         ),
     ]

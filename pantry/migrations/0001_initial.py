@@ -17,66 +17,189 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='ItemCategory',
+            name="ItemCategory",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50, unique=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=50, unique=True)),
             ],
             options={
-                'verbose_name_plural': 'ItemCategories',
+                "verbose_name_plural": "ItemCategories",
             },
         ),
         migrations.CreateModel(
-            name='Location',
+            name="Location",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('address', models.TextField(blank=True, null=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("address", models.TextField(blank=True, null=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "created_by",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='PantryItem',
+            name="PantryItem",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('barcode', models.CharField(blank=True, max_length=50, null=True, unique=True)),
-                ('min_stock_level', models.PositiveIntegerField(default=1, help_text='Minimum quantity to keep in stock')),
-                ('min_stock_alert', models.BooleanField(default=True, help_text='Enabled out-of-stock alerts')),
-                ('expiry_alert_days', models.PositiveIntegerField(default=7, help_text='Number of days before expiry to send alert')),
-                ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='pantry.itemcategory')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                (
+                    "barcode",
+                    models.CharField(blank=True, max_length=50, null=True, unique=True),
+                ),
+                (
+                    "min_stock_level",
+                    models.PositiveIntegerField(
+                        default=1, help_text="Minimum quantity to keep in stock"
+                    ),
+                ),
+                (
+                    "min_stock_alert",
+                    models.BooleanField(
+                        default=True, help_text="Enabled out-of-stock alerts"
+                    ),
+                ),
+                (
+                    "expiry_alert_days",
+                    models.PositiveIntegerField(
+                        default=7,
+                        help_text="Number of days before expiry to send alert",
+                    ),
+                ),
+                (
+                    "category",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="pantry.itemcategory",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='StorageUnit',
+            name="StorageUnit",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('unit_type', models.CharField(choices=[('freezer', 'Freezer'), ('refrigerator', 'Refrigerator'), ('closet', 'Closet'), ('cabinet', 'Cabinet'), ('pantry', 'Pantry')], max_length=20)),
-                ('temperature', models.DecimalField(blank=True, decimal_places=1, max_digits=5, null=True)),
-                ('notes', models.TextField(blank=True, null=True)),
-                ('location', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='storage_units', to='pantry.location')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                (
+                    "unit_type",
+                    models.CharField(
+                        choices=[
+                            ("freezer", "Freezer"),
+                            ("refrigerator", "Refrigerator"),
+                            ("closet", "Closet"),
+                            ("cabinet", "Cabinet"),
+                            ("pantry", "Pantry"),
+                        ],
+                        max_length=20,
+                    ),
+                ),
+                (
+                    "temperature",
+                    models.DecimalField(
+                        blank=True, decimal_places=1, max_digits=5, null=True
+                    ),
+                ),
+                ("notes", models.TextField(blank=True, null=True)),
+                (
+                    "location",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="storage_units",
+                        to="pantry.location",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Stock',
+            name="Stock",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('quantity', models.PositiveIntegerField(validators=[django.core.validators.MinValueValidator(0)])),
-                ('expiry_date', models.DateField(blank=True, null=True)),
-                ('purchase_date', models.DateField(default=datetime.date.today)),
-                ('batch_number', models.CharField(blank=True, max_length=50, null=True)),
-                ('item', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='stocks', to='pantry.pantryitem')),
-                ('storage_unit', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='pantry.storageunit')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "quantity",
+                    models.PositiveIntegerField(
+                        validators=[django.core.validators.MinValueValidator(0)]
+                    ),
+                ),
+                ("expiry_date", models.DateField(blank=True, null=True)),
+                ("purchase_date", models.DateField(default=datetime.date.today)),
+                (
+                    "batch_number",
+                    models.CharField(blank=True, max_length=50, null=True),
+                ),
+                (
+                    "item",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="stocks",
+                        to="pantry.pantryitem",
+                    ),
+                ),
+                (
+                    "storage_unit",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="pantry.storageunit",
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Stock',
+                "verbose_name_plural": "Stock",
             },
         ),
         migrations.AddField(
-            model_name='pantryitem',
-            name='default_storage',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='pantry.storageunit'),
+            model_name="pantryitem",
+            name="default_storage",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="pantry.storageunit",
+            ),
         ),
     ]

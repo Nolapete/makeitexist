@@ -1,0 +1,135 @@
+- model: pantry.location
+  pk: 1
+  fields:
+    name: Angie
+    address: 57509 Highway 436 Angie LA 70426
+    created_by: 1
+    created_at: 2025-09-24 22:12:13.042792+00:00
+- model: pantry.location
+  pk: 2
+  fields:
+    name: West Metairie
+    address: 3845 West Metairie Ave Metairie LA 70001
+    created_by: 1
+    created_at: 2025-09-24 22:12:45.654705+00:00
+- model: pantry.storageunit
+  pk: 1
+  fields:
+    name: Kitchen Pantry
+    unit_type: pantry
+    location: 2
+    temperature: null
+    notes: ''
+- model: pantry.storageunit
+  pk: 2
+  fields:
+    name: Locked Pantry
+    unit_type: pantry
+    location: 2
+    temperature: null
+    notes: ''
+- model: pantry.storageunit
+  pk: 3
+  fields:
+    name: Revolving Cabinet
+    unit_type: cabinet
+    location: 1
+    temperature: null
+    notes: ''
+- model: pantry.storageunit
+  pk: 4
+  fields:
+    name: Small Freezer Kitchen
+    unit_type: freezer
+    location: 1
+    temperature: null
+    notes: This is the freezer on the left side of the small refrigerator.
+- model: pantry.storageunit
+  pk: 5
+  fields:
+    name: Bigger Freezer Kitchen
+    unit_type: freezer
+    location: 1
+    temperature: null
+    notes: This is the larger chest freezer to the right of the smaller refrigerator
+      in the kitchen.
+- model: pantry.storageunit
+  pk: 6
+  fields:
+    name: Patio Room Upright Freezer
+    unit_type: freezer
+    location: 1
+    temperature: null
+    notes: ''
+- model: pantry.storageunit
+  pk: 7
+  fields:
+    name: Patio Room Upright Refrigerator
+    unit_type: refrigerator
+    location: 1
+    temperature: null
+    notes: ''
+- model: pantry.storageunit
+  pk: 8
+  fields:
+    name: Kitchen Main Refrigerator
+    unit_type: refrigerator
+    location: 1
+    temperature: null
+    notes: ''
+- model: pantry.storageunit
+  pk: 9
+  fields:
+    name: Kitchen Main Refrigerator Freezer
+    unit_type: freezer
+    location: 1
+    temperature: null
+    notes: ''
+- model: pantry.storageunit
+  pk: 10
+  fields:
+    name: Kitchen Smaller Refrigerator
+    unit_type: refrigerator
+    location: 1
+    temperature: null
+    notes: ''
+- model: pantry.storageunit
+  pk: 11
+  fields:
+    name: Kitchen Smaller Refrigerator Freezer
+    unit_type: freezer
+    location: 1
+    temperature: null
+    notes: ''
+- model: pantry.storageunit
+  pk: 12
+  fields:
+    name: Laundry Room Mini Fridge
+    unit_type: refrigerator
+    location: 2
+    temperature: null
+    notes: ''
+- model: pantry.storageunit
+  pk: 13
+  fields:
+    name: Laundry Room Upright Freezer
+    unit_type: freezer
+    location: 2
+    temperature: null
+    notes: ''
+- model: pantry.storageunit
+  pk: 14
+  fields:
+    name: Kitchen Main Refrigerator
+    unit_type: refrigerator
+    location: 2
+    temperature: null
+    notes: ''
+- model: pantry.storageunit
+  pk: 15
+  fields:
+    name: Kitchen Main Freezer
+    unit_type: freezer
+    location: 2
+    temperature: null
+    notes: ''

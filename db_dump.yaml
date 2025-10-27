@@ -1,0 +1,886 @@
+-   model: admin.logentry
+    pk: 1
+    fields:
+        action_time: 2025-09-26 20:37:49.833309+00:00
+        user: 1
+        content_type: 14
+        object_id: '1'
+        object_repr: Pete LoGiudice
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 2
+    fields:
+        action_time: 2025-09-26 20:55:39.807146+00:00
+        user: 1
+        content_type: 14
+        object_id: '1'
+        object_repr: Pete LoGiudice
+        action_flag: 2
+        change_message: '[]'
+-   model: admin.logentry
+    pk: 3
+    fields:
+        action_time: 2025-09-26 20:56:43.757525+00:00
+        user: 1
+        content_type: 14
+        object_id: '1'
+        object_repr: Pete LoGiudice
+        action_flag: 2
+        change_message: '[]'
+-   model: admin.logentry
+    pk: 4
+    fields:
+        action_time: 2025-09-26 21:01:10.780828+00:00
+        user: 1
+        content_type: 14
+        object_id: '1'
+        object_repr: Pete LoGiudice
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Photo"]}}]'
+-   model: admin.logentry
+    pk: 5
+    fields:
+        action_time: 2025-09-26 21:05:39.128577+00:00
+        user: 1
+        content_type: 13
+        object_id: '4'
+        object_repr: Tickets
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Tech icons"]}}]'
+-   model: admin.logentry
+    pk: 6
+    fields:
+        action_time: 2025-09-26 21:06:49.650950+00:00
+        user: 1
+        content_type: 13
+        object_id: '5'
+        object_repr: P2's Spice Company
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Tech icons"]}}]'
+-   model: admin.logentry
+    pk: 7
+    fields:
+        action_time: 2025-09-26 21:07:01.639314+00:00
+        user: 1
+        content_type: 13
+        object_id: '4'
+        object_repr: Tickets
+        action_flag: 2
+        change_message: '[]'
+-   model: admin.logentry
+    pk: 8
+    fields:
+        action_time: 2025-09-26 21:07:13.236116+00:00
+        user: 1
+        content_type: 13
+        object_id: '3'
+        object_repr: Pantry Management
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Tech icons"]}}]'
+-   model: admin.logentry
+    pk: 9
+    fields:
+        action_time: 2025-09-26 21:07:23.612715+00:00
+        user: 1
+        content_type: 13
+        object_id: '1'
+        object_repr: Clownfish Genetics
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Tech icons"]}}]'
+-   model: admin.logentry
+    pk: 10
+    fields:
+        action_time: 2025-09-26 21:07:32.558326+00:00
+        user: 1
+        content_type: 13
+        object_id: '2'
+        object_repr: St. Joseph Altar
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Tech icons"]}}]'
+-   model: admin.logentry
+    pk: 11
+    fields:
+        action_time: 2025-09-26 21:07:39.456943+00:00
+        user: 1
+        content_type: 13
+        object_id: '4'
+        object_repr: Tickets
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Is featured"]}}]'
+-   model: admin.logentry
+    pk: 12
+    fields:
+        action_time: 2025-09-27 06:49:24.687141+00:00
+        user: 1
+        content_type: 14
+        object_id: '1'
+        object_repr: Pete LoGiudice
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Bio"]}}]'
+-   model: auth.permission
+    fields:
+        name: Can add log entry
+        content_type: 1
+        codename: add_logentry
+-   model: auth.permission
+    fields:
+        name: Can change log entry
+        content_type: 1
+        codename: change_logentry
+-   model: auth.permission
+    fields:
+        name: Can delete log entry
+        content_type: 1
+        codename: delete_logentry
+-   model: auth.permission
+    fields:
+        name: Can view log entry
+        content_type: 1
+        codename: view_logentry
+-   model: auth.permission
+    fields:
+        name: Can add permission
+        content_type: 2
+        codename: add_permission
+-   model: auth.permission
+    fields:
+        name: Can change permission
+        content_type: 2
+        codename: change_permission
+-   model: auth.permission
+    fields:
+        name: Can delete permission
+        content_type: 2
+        codename: delete_permission
+-   model: auth.permission
+    fields:
+        name: Can view permission
+        content_type: 2
+        codename: view_permission
+-   model: auth.permission
+    fields:
+        name: Can add group
+        content_type: 3
+        codename: add_group
+-   model: auth.permission
+    fields:
+        name: Can change group
+        content_type: 3
+        codename: change_group
+-   model: auth.permission
+    fields:
+        name: Can delete group
+        content_type: 3
+        codename: delete_group
+-   model: auth.permission
+    fields:
+        name: Can view group
+        content_type: 3
+        codename: view_group
+-   model: auth.permission
+    fields:
+        name: Can add user
+        content_type: 4
+        codename: add_user
+-   model: auth.permission
+    fields:
+        name: Can change user
+        content_type: 4
+        codename: change_user
+-   model: auth.permission
+    fields:
+        name: Can delete user
+        content_type: 4
+        codename: delete_user
+-   model: auth.permission
+    fields:
+        name: Can view user
+        content_type: 4
+        codename: view_user
+-   model: auth.permission
+    fields:
+        name: Can add content type
+        content_type: 5
+        codename: add_contenttype
+-   model: auth.permission
+    fields:
+        name: Can change content type
+        content_type: 5
+        codename: change_contenttype
+-   model: auth.permission
+    fields:
+        name: Can delete content type
+        content_type: 5
+        codename: delete_contenttype
+-   model: auth.permission
+    fields:
+        name: Can view content type
+        content_type: 5
+        codename: view_contenttype
+-   model: auth.permission
+    fields:
+        name: Can add session
+        content_type: 6
+        codename: add_session
+-   model: auth.permission
+    fields:
+        name: Can change session
+        content_type: 6
+        codename: change_session
+-   model: auth.permission
+    fields:
+        name: Can delete session
+        content_type: 6
+        codename: delete_session
+-   model: auth.permission
+    fields:
+        name: Can view session
+        content_type: 6
+        codename: view_session
+-   model: auth.permission
+    fields:
+        name: Can add ticket
+        content_type: 7
+        codename: add_ticket
+-   model: auth.permission
+    fields:
+        name: Can change ticket
+        content_type: 7
+        codename: change_ticket
+-   model: auth.permission
+    fields:
+        name: Can delete ticket
+        content_type: 7
+        codename: delete_ticket
+-   model: auth.permission
+    fields:
+        name: Can view ticket
+        content_type: 7
+        codename: view_ticket
+-   model: auth.permission
+    fields:
+        name: Can add item category
+        content_type: 8
+        codename: add_itemcategory
+-   model: auth.permission
+    fields:
+        name: Can change item category
+        content_type: 8
+        codename: change_itemcategory
+-   model: auth.permission
+    fields:
+        name: Can delete item category
+        content_type: 8
+        codename: delete_itemcategory
+-   model: auth.permission
+    fields:
+        name: Can view item category
+        content_type: 8
+        codename: view_itemcategory
+-   model: auth.permission
+    fields:
+        name: Can add location
+        content_type: 9
+        codename: add_location
+-   model: auth.permission
+    fields:
+        name: Can change location
+        content_type: 9
+        codename: change_location
+-   model: auth.permission
+    fields:
+        name: Can delete location
+        content_type: 9
+        codename: delete_location
+-   model: auth.permission
+    fields:
+        name: Can view location
+        content_type: 9
+        codename: view_location
+-   model: auth.permission
+    fields:
+        name: Can add pantry item
+        content_type: 10
+        codename: add_pantryitem
+-   model: auth.permission
+    fields:
+        name: Can change pantry item
+        content_type: 10
+        codename: change_pantryitem
+-   model: auth.permission
+    fields:
+        name: Can delete pantry item
+        content_type: 10
+        codename: delete_pantryitem
+-   model: auth.permission
+    fields:
+        name: Can view pantry item
+        content_type: 10
+        codename: view_pantryitem
+-   model: auth.permission
+    fields:
+        name: Can add storage unit
+        content_type: 11
+        codename: add_storageunit
+-   model: auth.permission
+    fields:
+        name: Can change storage unit
+        content_type: 11
+        codename: change_storageunit
+-   model: auth.permission
+    fields:
+        name: Can delete storage unit
+        content_type: 11
+        codename: delete_storageunit
+-   model: auth.permission
+    fields:
+        name: Can view storage unit
+        content_type: 11
+        codename: view_storageunit
+-   model: auth.permission
+    fields:
+        name: Can add stock
+        content_type: 12
+        codename: add_stock
+-   model: auth.permission
+    fields:
+        name: Can change stock
+        content_type: 12
+        codename: change_stock
+-   model: auth.permission
+    fields:
+        name: Can delete stock
+        content_type: 12
+        codename: delete_stock
+-   model: auth.permission
+    fields:
+        name: Can view stock
+        content_type: 12
+        codename: view_stock
+-   model: auth.permission
+    fields:
+        name: Can add project
+        content_type: 13
+        codename: add_project
+-   model: auth.permission
+    fields:
+        name: Can change project
+        content_type: 13
+        codename: change_project
+-   model: auth.permission
+    fields:
+        name: Can delete project
+        content_type: 13
+        codename: delete_project
+-   model: auth.permission
+    fields:
+        name: Can view project
+        content_type: 13
+        codename: view_project
+-   model: auth.permission
+    fields:
+        name: Can add staff member
+        content_type: 14
+        codename: add_staffmember
+-   model: auth.permission
+    fields:
+        name: Can change staff member
+        content_type: 14
+        codename: change_staffmember
+-   model: auth.permission
+    fields:
+        name: Can delete staff member
+        content_type: 14
+        codename: delete_staffmember
+-   model: auth.permission
+    fields:
+        name: Can view staff member
+        content_type: 14
+        codename: view_staffmember
+-   model: auth.user
+    fields:
+        password: pbkdf2_sha256$1000000$FH7AR39NquJfHIDlGYLagZ$uVsGejJimM9ItanzX92ghjld7nejHgDUyOetF6s4z1A=
+        last_login: 2025-10-27 16:58:58.180561+00:00
+        is_superuser: true
+        username: django_admin
+        first_name: ''
+        last_name: ''
+        email: pete.logiuidice@zohomail.com
+        is_staff: true
+        is_active: true
+        date_joined: 2025-09-26 04:53:40.377558+00:00
+        groups: []
+        user_permissions: []
+-   model: contenttypes.contenttype
+    fields:
+        app_label: admin
+        model: logentry
+-   model: contenttypes.contenttype
+    fields:
+        app_label: auth
+        model: permission
+-   model: contenttypes.contenttype
+    fields:
+        app_label: auth
+        model: group
+-   model: contenttypes.contenttype
+    fields:
+        app_label: auth
+        model: user
+-   model: contenttypes.contenttype
+    fields:
+        app_label: contenttypes
+        model: contenttype
+-   model: contenttypes.contenttype
+    fields:
+        app_label: sessions
+        model: session
+-   model: contenttypes.contenttype
+    fields:
+        app_label: tickets
+        model: ticket
+-   model: contenttypes.contenttype
+    fields:
+        app_label: pantry
+        model: itemcategory
+-   model: contenttypes.contenttype
+    fields:
+        app_label: pantry
+        model: location
+-   model: contenttypes.contenttype
+    fields:
+        app_label: pantry
+        model: pantryitem
+-   model: contenttypes.contenttype
+    fields:
+        app_label: pantry
+        model: storageunit
+-   model: contenttypes.contenttype
+    fields:
+        app_label: pantry
+        model: stock
+-   model: contenttypes.contenttype
+    fields:
+        app_label: landing
+        model: project
+-   model: contenttypes.contenttype
+    fields:
+        app_label: landing
+        model: staffmember
+-   model: sessions.session
+    pk: 1eh9bt1fudlozbtjul73rppfek83sww7
+    fields:
+        session_data: .eJxVjEsOwiAUAO_C2hBAHg9cuu8ZyOMnVUOT0q6Md1eSLnQ7M5kX87Rv1e89r35O7MIkO_2yQPGR2xDpTu228Li0bZ0DHwk_bOfTkvLzerR_g0q9jq0qRgoES5B1EQoNhRA1okQApTIAWYsajJAQCp3dNycbHRRFTgRk7w-35Tbo:1vDQYc:lU0aZv2VtZ9GNBOOQz0bEySE-8PPUqaUONrWADYoCAU
+        expire_date: 2025-11-10 16:58:58.226985+00:00
+-   model: sessions.session
+    pk: 28wn2i8nnefviykf2vgtqap5lvfwwksm
+    fields:
+        session_data: .eJxVjEsOwiAUAO_C2hBAHg9cuu8ZyOMnVUOT0q6Md1eSLnQ7M5kX87Rv1e89r35O7MIkO_2yQPGR2xDpTu228Li0bZ0DHwk_bOfTkvLzerR_g0q9jq0qRgoES5B1EQoNhRA1okQApTIAWYsajJAQCp3dNycbHRRFTgRk7w-35Tbo:1vBzS3:2GbKLXMaTn2W6X_GtDeE0Cy-bH2iT7agZTpyOfFV1sA
+        expire_date: 2025-11-06 17:50:15.371765+00:00
+-   model: sessions.session
+    pk: 5pllu9fk469wksssyrrpu7az93mm2j7m
+    fields:
+        session_data: .eJxVjEsOwiAUAO_C2hBAHg9cuu8ZyOMnVUOT0q6Md1eSLnQ7M5kX87Rv1e89r35O7MIkO_2yQPGR2xDpTu228Li0bZ0DHwk_bOfTkvLzerR_g0q9jq0qRgoES5B1EQoNhRA1okQApTIAWYsajJAQCp3dNycbHRRFTgRk7w-35Tbo:1v7w82:nk7KE3tCLVmZYqWNDY2IG-VdI3WOTPJWRrO2H4g6ubE
+        expire_date: 2025-10-26 13:28:50.860543+00:00
+-   model: sessions.session
+    pk: excbl4958ss82b8i6mlhpxz1kfyspj23
+    fields:
+        session_data: .eJxVjEsOwiAUAO_C2hBAHg9cuu8ZyOMnVUOT0q6Md1eSLnQ7M5kX87Rv1e89r35O7MIkO_2yQPGR2xDpTu228Li0bZ0DHwk_bOfTkvLzerR_g0q9jq0qRgoES5B1EQoNhRA1okQApTIAWYsajJAQCp3dNycbHRRFTgRk7w-35Tbo:1v7oM0:oTspOR4Bi6OHDe9QmCl_YpudlbpeN5pgVIrRxgdovso
+        expire_date: 2025-10-26 05:10:44.794829+00:00
+-   model: sessions.session
+    pk: kxkz68o8vm1vs1nm18rdf4yx3yql7x6f
+    fields:
+        session_data: .eJxVjEsOwiAUAO_C2hBAHg9cuu8ZyOMnVUOT0q6Md1eSLnQ7M5kX87Rv1e89r35O7MIkO_2yQPGR2xDpTu228Li0bZ0DHwk_bOfTkvLzerR_g0q9jq0qRgoES5B1EQoNhRA1okQApTIAWYsajJAQCp3dNycbHRRFTgRk7w-35Tbo:1v2DWX:xvjM0_PhAzxMRh5rLGoQj5cx6K31kKsLGIomLa3lSTM
+        expire_date: 2025-10-10 18:50:29.761008+00:00
+-   model: sessions.session
+    pk: om74xn2x2m9jswpmwtnl8dmasgk2tm0a
+    fields:
+        session_data: .eJxVjEsOwiAUAO_C2hBAHg9cuu8ZyOMnVUOT0q6Md1eSLnQ7M5kX87Rv1e89r35O7MIkO_2yQPGR2xDpTu228Li0bZ0DHwk_bOfTkvLzerR_g0q9jq0qRgoES5B1EQoNhRA1okQApTIAWYsajJAQCp3dNycbHRRFTgRk7w-35Tbo:1v2F9y:8VZC4nwpDnvDom2s6_FVthpialXl4jNA9ESDfXeVY3Q
+        expire_date: 2025-10-10 20:35:18.808664+00:00
+-   model: sessions.session
+    pk: tzkfeja599nhj30ry8a4i84ebs60x8xi
+    fields:
+        session_data: .eJxVjEsOwiAUAO_C2hBAHg9cuu8ZyOMnVUOT0q6Md1eSLnQ7M5kX87Rv1e89r35O7MIkO_2yQPGR2xDpTu228Li0bZ0DHwk_bOfTkvLzerR_g0q9jq0qRgoES5B1EQoNhRA1okQApTIAWYsajJAQCp3dNycbHRRFTgRk7w-35Tbo:1v20gm:hHC_RCWQxizXya8lK-Uo9AZeX5lfPYVaIwJ29cmR9BQ
+        expire_date: 2025-10-10 05:08:12.626298+00:00
+-   model: sessions.session
+    pk: vp20domqt8t79mz0objc9tafpgyloio2
+    fields:
+        session_data: .eJxVjEsOwiAUAO_C2hBAHg9cuu8ZyOMnVUOT0q6Md1eSLnQ7M5kX87Rv1e89r35O7MIkO_2yQPGR2xDpTu228Li0bZ0DHwk_bOfTkvLzerR_g0q9jq0qRgoES5B1EQoNhRA1okQApTIAWYsajJAQCp3dNycbHRRFTgRk7w-35Tbo:1v28Yg:p1p8x8lMCS74VloqAVTd7gFETuMPaCECeqY-D-ygEF4
+        expire_date: 2025-10-10 13:32:22.717076+00:00
+-   model: sessions.session
+    pk: xsknhm9fbpdo29f77uf024pwfu5sot79
+    fields:
+        session_data: .eJxVjEsOwiAUAO_C2hBAHg9cuu8ZyOMnVUOT0q6Md1eSLnQ7M5kX87Rv1e89r35O7MIkO_2yQPGR2xDpTu228Li0bZ0DHwk_bOfTkvLzerR_g0q9jq0qRgoES5B1EQoNhRA1okQApTIAWYsajJAQCp3dNycbHRRFTgRk7w-35Tbo:1v46n2:rNqb2z9Goo8apv-6t3xgzNsFWyi_bYYm2uetcDFcTqw
+        expire_date: 2025-10-16 00:03:20.956409+00:00
+-   model: landing.project
+    pk: 1
+    fields:
+        title: Clownfish Genetics
+        description: An app for those interested in the genetics of clownfish breeding.
+        technologies: Django, PostgreSQL, HTML, CSS
+        tech_icons: fas fa-code, fas fa-database, fab fa-html5, fab fa-css3
+        image: project_images/clownfishgenetics.org.png
+        project_url: https://www.clownfishgenetics.org
+        is_makeitexist_app: false
+        display_domain: clownfishgenetics.org
+        is_featured: false
+-   model: landing.project
+    pk: 2
+    fields:
+        title: St. Joseph Altar
+        description: Information about the traditions of St. Joseph Altars in the
+            New Orleans area.  Listings of all known altars and route planning for
+            the season.
+        technologies: Django, PostgreSQL, HTML, CSS
+        tech_icons: fas fa-code, fas fa-database, fab fa-html5, fab fa-css3
+        image: project_images/stjosephaltar.org.png
+        project_url: https://www.stjosephaltar.org
+        is_makeitexist_app: false
+        display_domain: stjosephaltar.org
+        is_featured: false
+-   model: landing.project
+    pk: 3
+    fields:
+        title: Pantry Management
+        description: Pantry management to track inventory, restocking, and expiry.  Convenient
+            shopping list sent to your phone.
+        technologies: Django, PostgreSQL, HTML, CSS
+        tech_icons: fas fa-code, fas fa-database, fab fa-html5, fab fa-css3
+        image: project_images/pantry.png
+        project_url: https://www.makeitexist.net/pantry
+        is_makeitexist_app: true
+        display_domain: makeitexist.net
+        is_featured: false
+-   model: landing.project
+    pk: 4
+    fields:
+        title: Tickets
+        description: Ticketing system that is more than just a todo list.  Inspired
+            by Freshdesk and what we wished it did.
+        technologies: Django, PostgreSQL, HTML, CSS
+        tech_icons: fas fa-code, fas fa-database, fab fa-html5, fab fa-css3
+        image: project_images/tickets.png
+        project_url: https://www.makeitexist.net/tickets
+        is_makeitexist_app: true
+        display_domain: makeitexist.net
+        is_featured: true
+-   model: landing.project
+    pk: 5
+    fields:
+        title: P2's Spice Company
+        description: Site for P2's Spice Company
+        technologies: Django, PostgreSQL, HTML, CSS
+        tech_icons: fas fa-code, fas fa-database, fab fa-html5, fab fa-css3
+        image: project_images/p2spice.com.png
+        project_url: http://www.p2spice.com
+        is_makeitexist_app: false
+        display_domain: p2spice.com
+        is_featured: false
+-   model: landing.project
+    pk: 6
+    fields:
+        title: Room For More Ranch
+        description: Site for Room For More Ranch
+        technologies: Django, PostgreSQL, HTML, CSS
+        tech_icons: fas fa-code, fas fa-database, fab fa-html5, fab fa-css3
+        image: project_images/roomformoreranch.com.png
+        project_url: http://www.roomformoreranch.com
+        is_makeitexist_app: false
+        display_domain: roomformoreranch.com
+        is_featured: false
+-   model: landing.staffmember
+    pk: 1
+    fields:
+        name: Pete LoGiudice
+        email: pete.logiudice@zohomail.com
+        phone: '5044328730'
+        photo: staff_photos/P_LoGiudice_005_zcZYCGp.jpg
+        bio: 'Django enthusiast with a love for PostgreSQL.  Thoroughly enjoying the
+            creative magic of AI development. Leveraging 35+ years of experience in
+            the technology arena, particularly in tech support, database programming,
+            fund raising analytics and reporting.  Designing apps that do what I wish
+            other apps that I''ve used would do.  Invigorated by the philosophy Elon
+            Musk has demonstrated with SpaceX, Tesla, Boring Company, and his other
+            ventures: Just make it exist.  You can make it good later.'
+-   model: tickets.ticket
+    pk: 1
+    fields:
+        title: Figure out brackets
+        description: Where did these brackets come from?
+        status: open
+        priority: medium
+        assigned_to: null
+        created_by: 1
+        created_at: 2025-09-26 13:33:43.193151+00:00
+        updated_at: 2025-09-26 13:33:43.193163+00:00
+-   model: tickets.ticket
+    pk: 2
+    fields:
+        title: Mobile friendly
+        description: Make all apps mobile friendly and have base.html
+        status: open
+        priority: high
+        assigned_to: null
+        created_by: 1
+        created_at: 2025-09-26 13:40:41.578314+00:00
+        updated_at: 2025-09-26 13:40:41.578323+00:00
+-   model: tickets.ticket
+    pk: 3
+    fields:
+        title: Search results
+        description: Search result should display like list
+        status: open
+        priority: medium
+        assigned_to: null
+        created_by: 1
+        created_at: 2025-09-26 13:41:38.712406+00:00
+        updated_at: 2025-09-26 13:41:38.712415+00:00
+-   model: tickets.ticket
+    pk: 4
+    fields:
+        title: Ticket features
+        description: Assign, resolve
+        status: open
+        priority: medium
+        assigned_to: null
+        created_by: 1
+        created_at: 2025-09-26 13:42:50.784080+00:00
+        updated_at: 2025-09-26 13:42:50.784090+00:00
+-   model: tickets.ticket
+    pk: 5
+    fields:
+        title: Pantry features
+        description: Add items and barcode scan add
+        status: open
+        priority: medium
+        assigned_to: null
+        created_by: 1
+        created_at: 2025-09-26 13:43:32.954367+00:00
+        updated_at: 2025-09-26 13:43:32.954377+00:00
+-   model: tickets.ticket
+    pk: 6
+    fields:
+        title: Portfolio app
+        description: Links and parallax page for each app
+        status: open
+        priority: high
+        assigned_to: null
+        created_by: 1
+        created_at: 2025-09-26 13:46:35.030123+00:00
+        updated_at: 2025-09-26 13:46:35.030132+00:00
+-   model: tickets.ticket
+    pk: 7
+    fields:
+        title: Ticket CRUD
+        description: Add CRUD for tckets
+        status: open
+        priority: medium
+        assigned_to: null
+        created_by: 1
+        created_at: 2025-10-12 13:30:08.379783+00:00
+        updated_at: 2025-10-12 13:30:08.379805+00:00
+-   model: tickets.ticket
+    pk: 8
+    fields:
+        title: Parse clownfish
+        description: Parse clownfish from sphagetti ifs. Make yaml loaddata for both
+            calculator apps
+        status: open
+        priority: medium
+        assigned_to: null
+        created_by: 1
+        created_at: 2025-10-12 13:31:38.647823+00:00
+        updated_at: 2025-10-12 13:31:38.647838+00:00
+-   model: tickets.ticket
+    pk: 9
+    fields:
+        title: Altar details
+        description: Add altar events and contacts to open accordion
+        status: open
+        priority: medium
+        assigned_to: null
+        created_by: 1
+        created_at: 2025-10-12 13:32:46.678050+00:00
+        updated_at: 2025-10-12 13:32:46.678062+00:00
+-   model: tickets.ticket
+    pk: 10
+    fields:
+        title: Move old apps into makeitexist
+        description: Move old apps from django site ,etc. Into makeitexist project
+        status: open
+        priority: low
+        assigned_to: null
+        created_by: 1
+        created_at: 2025-10-12 13:34:06.607051+00:00
+        updated_at: 2025-10-12 13:34:06.607065+00:00
+-   model: tickets.ticket
+    pk: 11
+    fields:
+        title: Move 2nd calculator
+        description: Move 2nd calculator into clownfisgenetics
+        status: open
+        priority: medium
+        assigned_to: null
+        created_by: 1
+        created_at: 2025-10-12 13:34:54.318531+00:00
+        updated_at: 2025-10-12 13:34:54.318543+00:00
+-   model: tickets.ticket
+    pk: 12
+    fields:
+        title: stjosephaltar deploy
+        description: "psql -U postgres -d your_database_name\r\nCREATE EXTENSION postgis;\r\n\r\nnew
+            environment settings\r\n\r\npush changes\r\n\r\nadd uwsgi to requirements.txt\r\ninstall
+            requirements\r\nchange debug to false"
+        status: open
+        priority: high
+        assigned_to: null
+        created_by: 1
+        created_at: 2025-10-23 17:52:09.474608+00:00
+        updated_at: 2025-10-23 17:52:09.474637+00:00
+-   model: tickets.ticket
+    pk: 13
+    fields:
+        title: github ssh key
+        description: create ssh key and use for github in pycharm
+        status: open
+        priority: medium
+        assigned_to: null
+        created_by: 1
+        created_at: 2025-10-23 18:17:07.339763+00:00
+        updated_at: 2025-10-23 18:17:07.339975+00:00
+-   model: pantry.location
+    pk: 1
+    fields:
+        name: Angie
+        address: 57509 Highway 436 Angie LA 70426
+        created_by: 1
+        created_at: 2025-09-24 22:12:13.042792+00:00
+-   model: pantry.location
+    pk: 2
+    fields:
+        name: West Metairie
+        address: 3845 West Metairie Ave Metairie LA 70001
+        created_by: 1
+        created_at: 2025-09-24 22:12:45.654705+00:00
+-   model: pantry.storageunit
+    pk: 1
+    fields:
+        name: Kitchen Pantry
+        unit_type: pantry
+        location: 2
+        temperature: null
+        notes: ''
+-   model: pantry.storageunit
+    pk: 2
+    fields:
+        name: Locked Pantry
+        unit_type: pantry
+        location: 2
+        temperature: null
+        notes: ''
+-   model: pantry.storageunit
+    pk: 3
+    fields:
+        name: Revolving Cabinet
+        unit_type: cabinet
+        location: 1
+        temperature: null
+        notes: ''
+-   model: pantry.storageunit
+    pk: 4
+    fields:
+        name: Small Freezer Kitchen
+        unit_type: freezer
+        location: 1
+        temperature: null
+        notes: This is the freezer on the left side of the small refrigerator.
+-   model: pantry.storageunit
+    pk: 5
+    fields:
+        name: Bigger Freezer Kitchen
+        unit_type: freezer
+        location: 1
+        temperature: null
+        notes: This is the larger chest freezer to the right of the smaller refrigerator
+            in the kitchen.
+-   model: pantry.storageunit
+    pk: 6
+    fields:
+        name: Patio Room Upright Freezer
+        unit_type: freezer
+        location: 1
+        temperature: null
+        notes: ''
+-   model: pantry.storageunit
+    pk: 7
+    fields:
+        name: Patio Room Upright Refrigerator
+        unit_type: refrigerator
+        location: 1
+        temperature: null
+        notes: ''
+-   model: pantry.storageunit
+    pk: 8
+    fields:
+        name: Kitchen Main Refrigerator
+        unit_type: refrigerator
+        location: 1
+        temperature: null
+        notes: ''
+-   model: pantry.storageunit
+    pk: 9
+    fields:
+        name: Kitchen Main Refrigerator Freezer
+        unit_type: freezer
+        location: 1
+        temperature: null
+        notes: ''
+-   model: pantry.storageunit
+    pk: 10
+    fields:
+        name: Kitchen Smaller Refrigerator
+        unit_type: refrigerator
+        location: 1
+        temperature: null
+        notes: ''
+-   model: pantry.storageunit
+    pk: 11
+    fields:
+        name: Kitchen Smaller Refrigerator Freezer
+        unit_type: freezer
+        location: 1
+        temperature: null
+        notes: ''
+-   model: pantry.storageunit
+    pk: 12
+    fields:
+        name: Laundry Room Mini Fridge
+        unit_type: refrigerator
+        location: 2
+        temperature: null
+        notes: ''
+-   model: pantry.storageunit
+    pk: 13
+    fields:
+        name: Laundry Room Upright Freezer
+        unit_type: freezer
+        location: 2
+        temperature: null
+        notes: ''
+-   model: pantry.storageunit
+    pk: 14
+    fields:
+        name: Kitchen Main Refrigerator
+        unit_type: refrigerator
+        location: 2
+        temperature: null
+        notes: ''
+-   model: pantry.storageunit
+    pk: 15
+    fields:
+        name: Kitchen Main Freezer
+        unit_type: freezer
+        location: 2
+        temperature: null
+        notes: ''

@@ -1,0 +1,89 @@
+- model: landing.project
+  pk: 1
+  fields:
+    title: Clownfish Genetics
+    description: An app for those interested in the genetics of clownfish breeding.
+    technologies: Django, PostgreSQL, HTML, CSS
+    tech_icons: fas fa-code, fas fa-database, fab fa-html5, fab fa-css3
+    image: project_images/clownfishgenetics.org.png
+    project_url: https://www.clownfishgenetics.org
+    is_makeitexist_app: false
+    display_domain: clownfishgenetics.org
+    is_featured: false
+- model: landing.project
+  pk: 2
+  fields:
+    title: St. Joseph Altar
+    description: Information about the traditions of St. Joseph Altars in the New
+      Orleans area.  Listings of all known altars and route planning for the season.
+    technologies: Django, PostgreSQL, HTML, CSS
+    tech_icons: fas fa-code, fas fa-database, fab fa-html5, fab fa-css3
+    image: project_images/stjosephaltar.org.png
+    project_url: https://www.stjosephaltar.org
+    is_makeitexist_app: false
+    display_domain: stjosephaltar.org
+    is_featured: false
+- model: landing.project
+  pk: 3
+  fields:
+    title: Pantry Management
+    description: Pantry management to track inventory, restocking, and expiry.  Convenient
+      shopping list sent to your phone.
+    technologies: Django, PostgreSQL, HTML, CSS
+    tech_icons: fas fa-code, fas fa-database, fab fa-html5, fab fa-css3
+    image: project_images/pantry.png
+    project_url: https://www.makeitexist.net/pantry
+    is_makeitexist_app: true
+    display_domain: makeitexist.net
+    is_featured: false
+- model: landing.project
+  pk: 4
+  fields:
+    title: Tickets
+    description: Ticketing system that is more than just a todo list.  Inspired by
+      Freshdesk and what we wished it did.
+    technologies: Django, PostgreSQL, HTML, CSS
+    tech_icons: fas fa-code, fas fa-database, fab fa-html5, fab fa-css3
+    image: project_images/tickets.png
+    project_url: https://www.makeitexist.net/tickets
+    is_makeitexist_app: true
+    display_domain: makeitexist.net
+    is_featured: true
+- model: landing.project
+  pk: 5
+  fields:
+    title: P2's Spice Company
+    description: Site for P2's Spice Company
+    technologies: Django, PostgreSQL, HTML, CSS
+    tech_icons: fas fa-code, fas fa-database, fab fa-html5, fab fa-css3
+    image: project_images/p2spice.com.png
+    project_url: http://www.p2spice.com
+    is_makeitexist_app: false
+    display_domain: p2spice.com
+    is_featured: false
+- model: landing.project
+  pk: 6
+  fields:
+    title: Room For More Ranch
+    description: Site for Room For More Ranch
+    technologies: Django, PostgreSQL, HTML, CSS
+    tech_icons: fas fa-code, fas fa-database, fab fa-html5, fab fa-css3
+    image: project_images/roomformoreranch.com.png
+    project_url: http://www.roomformoreranch.com
+    is_makeitexist_app: false
+    display_domain: roomformoreranch.com
+    is_featured: false
+- model: landing.staffmember
+  pk: 1
+  fields:
+    name: Pete LoGiudice
+    email: pete.logiudice@zohomail.com
+    phone: '5044328730'
+    photo: staff_photos/P_LoGiudice_005_zcZYCGp.jpg
+    bio: 'Django enthusiast with a love for PostgreSQL.  Thoroughly enjoying the creative
+      magic of AI development. Leveraging 35+ years of experience in the technology
+      arena, particularly in tech support, database programming, fund raising analytics
+      and reporting.  Designing apps that do what I wish other apps that I''ve used
+      would do.  Invigorated by the philosophy Elon Musk has demonstrated with SpaceX,
+      Tesla, Boring Company, and his other ventures: Just make it exist.  You can
+      make it good later.'

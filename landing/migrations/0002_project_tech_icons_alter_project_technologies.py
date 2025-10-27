@@ -6,18 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('landing', '0001_initial'),
+        ("landing", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='project',
-            name='tech_icons',
-            field=models.CharField(blank=True, help_text="Font Awesome icon classes, separated by commas (e.g., 'fab fa-python, fab fa-django').", max_length=500),
+            model_name="project",
+            name="tech_icons",
+            field=models.CharField(
+                blank=True,
+                help_text="Font Awesome icon classes, separated by commas (e.g., 'fab fa-python, fab fa-django').",
+                max_length=500,
+            ),
         ),
         migrations.AlterField(
-            model_name='project',
-            name='technologies',
-            field=models.CharField(help_text='e.g., Python, Django, PostgreSQL', max_length=200),
+            model_name="project",
+            name="technologies",
+            field=models.CharField(
+                help_text="e.g., Python, Django, PostgreSQL", max_length=200
+            ),
         ),
     ]

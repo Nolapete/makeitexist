@@ -8,24 +8,41 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('tickets', '0001_initial'),
+        ("tickets", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='ticket',
-            name='created_by',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='created_tickets', to=settings.AUTH_USER_MODEL),
+            model_name="ticket",
+            name="created_by",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="created_tickets",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AlterField(
-            model_name='ticket',
-            name='priority',
-            field=models.CharField(choices=[('high', 'High'), ('medium', 'Medium'), ('low', 'Low')], default='medium', max_length=10),
+            model_name="ticket",
+            name="priority",
+            field=models.CharField(
+                choices=[("high", "High"), ("medium", "Medium"), ("low", "Low")],
+                default="medium",
+                max_length=10,
+            ),
         ),
         migrations.AlterField(
-            model_name='ticket',
-            name='status',
-            field=models.CharField(choices=[('open', 'Open'), ('in_progress', 'In Progress'), ('resolved', 'Resolved'), ('closed', 'Closed')], default='open', max_length=20),
+            model_name="ticket",
+            name="status",
+            field=models.CharField(
+                choices=[
+                    ("open", "Open"),
+                    ("in_progress", "In Progress"),
+                    ("resolved", "Resolved"),
+                    ("closed", "Closed"),
+                ],
+                default="open",
+                max_length=20,
+            ),
         ),
     ]

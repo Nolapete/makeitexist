@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('landing', '0002_project_tech_icons_alter_project_technologies'),
+        ("landing", "0002_project_tech_icons_alter_project_technologies"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='project',
-            name='is_featured',
-            field=models.BooleanField(default=False, help_text='Mark this project as featured.'),
+            model_name="project",
+            name="is_featured",
+            field=models.BooleanField(
+                default=False, help_text="Mark this project as featured."
+            ),
         ),
     ]
