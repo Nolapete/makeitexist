@@ -18,7 +18,7 @@ class Project(models.Model):
         blank=True, help_text="The URL to the project's website."
     )
     is_makeitexist_app = models.BooleanField(
-        default=True, help_text="Is this an app for makeitexist.net?"
+        default=True, help_text="Is this an app for config.net?"
     )
     display_domain = models.CharField(
         max_length=100,

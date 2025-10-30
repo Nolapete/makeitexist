@@ -34,7 +34,7 @@
     image: project_images/pantry.png
     project_url: https://www.makeitexist.net/pantry
     is_makeitexist_app: true
-    display_domain: makeitexist.net
+    display_domain: config.net
     is_featured: false
 - model: landing.project
   pk: 4
@@ -47,7 +47,7 @@
     image: project_images/tickets.png
     project_url: https://www.makeitexist.net/tickets
     is_makeitexist_app: true
-    display_domain: makeitexist.net
+    display_domain: config.net
     is_featured: true
 - model: landing.project
   pk: 5

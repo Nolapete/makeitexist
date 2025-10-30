@@ -706,8 +706,8 @@
 -   model: tickets.ticket
     pk: 10
     fields:
-        title: Move old apps into makeitexist
-        description: Move old apps from django site ,etc. Into makeitexist project
+        title: Move old apps into config
+        description: Move old apps from django site ,etc. Into config project
         status: open
         priority: low
         assigned_to: null

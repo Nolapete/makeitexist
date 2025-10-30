@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                 (
                     "is_makeitexist_app",
                     models.BooleanField(
-                        default=True, help_text="Is this an app for makeitexist.net?"
+                        default=True, help_text="Is this an app for config.net?"
                     ),
                 ),
                 (
