@@ -10,6 +10,7 @@
             hx-get="{% url 'ticket_list' %}" 
             hx-target="#ticket-container" 
             hx-trigger="change"
+            hx-include="this"
             name="status">
         {% for value, label in status_choices %}
             <option value="{{ value }}" {% if value == current_status %}selected{% endif %}>{{ label }}</option>
