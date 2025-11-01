@@ -1,3 +1,5 @@
+# tickets/views.py
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Ticket
@@ -18,7 +20,10 @@ def create_ticket(request):
             ticket = form.save(commit=False)
             ticket.created_by = request.user
             ticket.save()
+            print(f"\n--- DEBUGGING FORM ERRORS ---\n{form.errors}\n---------------------------\n")
             return redirect("ticket_list")
+        else:
+            print("form is not valid")
     else:
         form = TicketForm()
     return render(request, "tickets/create_ticket.html", {"form": form})
