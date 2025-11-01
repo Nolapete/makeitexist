@@ -3,16 +3,18 @@
         <div class="ticket-card">
             <details class="group">
                 <summary class="ticket-summary">
-                    <div class="flex-1">
-                        <a href="{% url 'ticket_detail' ticket.pk %}" class="ticket-title">
-                            {{ ticket.title }}
-                        </a>
-                    </div>
-                    <div class="flex items-center">
-                        <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform duration-200" 
-                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
+                    <div class="flex items-center space-x-3 flex-1">
+                        <div class="flex-shrink-0">
+                            <svg class="toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <a href="{% url 'ticket_detail' ticket.pk %}" class="enhanced-title">
+                                <span class="text-blue-600 font-mono text-sm">#{{ ticket.id }}</span>
+                                <span>{{ ticket.title }}</span>
+                            </a>
+                        </div>
                     </div>
                 </summary>
                 
