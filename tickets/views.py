@@ -3,7 +3,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Ticket
-from .forms import TicketForm
+from .forms import TicketForm, TicketUpdateForm
 
 
 @login_required
@@ -63,12 +63,12 @@ def ticket_detail(request, pk):
 def update_ticket(request, pk):
     ticket = get_object_or_404(Ticket, pk=pk, created_by=request.user)
     if request.method == "POST":
-        form = TicketForm(request.POST, instance=ticket)
+        form = TicketUpdateForm(request.POST, instance=ticket)
         if form.is_valid():
             form.save()
             return redirect("ticket_detail", pk=ticket.pk)
     else:
-        form = TicketForm(instance=ticket)
+        form = TicketUpdateForm(instance=ticket)
     return render(request, "tickets/update_ticket.html", {"form": form, "ticket": ticket})
 
 
