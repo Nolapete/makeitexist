@@ -33,3 +33,24 @@ def create_ticket(request):
 def ticket_detail(request, pk):
     ticket = get_object_or_404(Ticket, pk=pk, created_by=request.user)
     return render(request, "tickets/ticket_detail.html", {"ticket": ticket})
+
+
+@login_required
+def update_ticket(request, pk):
+    ticket = get_object_or_404(Ticket, pk=pk, created_by=request.user)
+    if request.method == "POST":
+        form = TicketForm(request.POST, instance=ticket)
+        if form.is_valid():
+            form.save()
+            return redirect("ticket_detail", pk=ticket.pk)
+    else:
+        form = TicketForm(instance=ticket)
+    return render(request, "tickets/update_ticket.html", {"form": form, "ticket": ticket})
+
+
+@login_required
+def resolve_ticket(request, pk):
+    ticket = get_object_or_404(Ticket, pk=pk, created_by=request.user)
+    ticket.status = "resolved"
+    ticket.save()
+    return redirect("ticket_detail", pk=ticket.pk)

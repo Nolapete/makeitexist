@@ -7,7 +7,7 @@
         <details>
             <summary><a href="{% url 'ticket_detail' ticket.pk %}">{{ ticket.title }}</a> </summary>
             <div class="content">
-                {{ ticket.get_priority_display }} 
+                Priority: {{ ticket.get_priority_display }} | Status: {{ ticket.get_status_display }}
                 Last updated: {{ ticket.updated_at|date:"Y-m-d H:i" }}
             </div>
         </details>
