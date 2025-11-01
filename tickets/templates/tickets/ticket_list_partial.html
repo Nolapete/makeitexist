@@ -1,20 +1,93 @@
-<div class="accordion-container">
+<div class="space-y-4">
     {% for ticket in tickets %}
-        <details>
-            <summary><a href="{% url 'ticket_detail' ticket.pk %}">{{ ticket.title }}</a></summary>
-            <div class="content">
-                <p><strong>Description:</strong> {{ ticket.description|truncatewords:20 }}</p>
-                <p><strong>Priority:</strong> {{ ticket.get_priority_display }} | <strong>Status:</strong> {{ ticket.get_status_display }}</p>
-                <p><strong>Created:</strong> {{ ticket.created_at|date:"Y-m-d H:i" }} | <strong>Updated:</strong> {{ ticket.updated_at|date:"Y-m-d H:i" }}</p>
-                <p><strong>Created By:</strong> {{ ticket.created_by.username }}</p>
-                {% if ticket.assigned_to %}
-                    <p><strong>Assigned To:</strong> {{ ticket.assigned_to.username }}</p>
-                {% else %}
-                    <p><strong>Assigned To:</strong> Unassigned</p>
-                {% endif %}
-            </div>
-        </details>
+        <div class="ticket-card">
+            <details class="group">
+                <summary class="ticket-summary">
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3">
+                            <a href="{% url 'ticket_detail' ticket.pk %}" class="ticket-title">
+                                {{ ticket.title }}
+                            </a>
+                            <span class="status-badge status-{{ ticket.status }}">
+                                {{ ticket.get_status_display }}
+                            </span>
+                            <span class="status-badge priority-{{ ticket.priority }}">
+                                {{ ticket.get_priority_display }}
+                            </span>
+                        </div>
+                        <div class="ticket-meta mt-1">
+                            <span>Created: {{ ticket.created_at|date:"M d, Y H:i" }}</span>
+                            <span>•</span>
+                            <span>Updated: {{ ticket.updated_at|date:"M d, Y H:i" }}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform duration-200" 
+                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </summary>
+                
+                <div class="ticket-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-sm font-medium text-gray-900 mb-2">Description</h4>
+                                <p class="text-sm text-gray-600 leading-relaxed">
+                                    {{ ticket.description|truncatewords:30 }}
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <h4 class="text-sm font-medium text-gray-900 mb-1">Created By</h4>
+                                    <p class="text-sm text-gray-600">{{ ticket.created_by.username }}</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium text-gray-900 mb-1">Assigned To</h4>
+                                    <p class="text-sm text-gray-600">
+                                        {% if ticket.assigned_to %}
+                                            {{ ticket.assigned_to.username }}
+                                        {% else %}
+                                            <span class="text-gray-400 italic">Unassigned</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex space-x-2 pt-2">
+                                <a href="{% url 'ticket_detail' ticket.pk %}" 
+                                   class="text-xs px-3 py-1 bg-blue-50 text-blue-700 rounded-full hover:bg-blue-100 transition-colors duration-150">
+                                    View Details
+                                </a>
+                                <a href="{% url 'update_ticket' ticket.pk %}" 
+                                   class="text-xs px-3 py-1 bg-gray-50 text-gray-700 rounded-full hover:bg-gray-100 transition-colors duration-150">
+                                    Edit
+                                </a>
+                                {% if ticket.status != 'resolved' and ticket.status != 'closed' %}
+                                    <a href="{% url 'resolve_ticket' ticket.pk %}" 
+                                       class="text-xs px-3 py-1 bg-green-50 text-green-700 rounded-full hover:bg-green-100 transition-colors duration-150"
+                                       onclick="return confirm('Are you sure you want to resolve this ticket?')">
+                                        Resolve
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </details>
+        </div>
     {% empty %}
-        <p>No tickets found for the selected status.</p>
+        <div class="text-center py-12">
+            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            <h3 class="mt-2 text-sm font-medium text-gray-900">No tickets found</h3>
+            <p class="mt-1 text-sm text-gray-500">No tickets match the selected status filter.</p>
+        </div>
     {% endfor %}
 </div>

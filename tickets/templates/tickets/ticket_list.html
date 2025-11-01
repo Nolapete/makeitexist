@@ -1,23 +1,42 @@
+{% extends 'tickets/base_tickets.html' %}
 {% load static %}
-<script src="https://unpkg.com/htmx.org@1.9.10"></script>
 
-<h1>Your Tickets</h1>
-<a href="{% url 'create_ticket' %}" class="btn btn-primary mb-3">Create New Ticket</a>
+{% block title %}Your Tickets{% endblock %}
 
-<div class="mb-3">
-    <label for="status-filter" class="form-label">Filter by Status:</label>
-    <select id="status-filter" class="form-select" 
-            hx-get="{% url 'ticket_list' %}" 
-            hx-target="#ticket-container" 
-            hx-trigger="change"
-            hx-include="this"
-            name="status">
-        {% for value, label in status_choices %}
-            <option value="{{ value }}" {% if value == current_status %}selected{% endif %}>{{ label }}</option>
-        {% endfor %}
-    </select>
+{% block content %}
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-gray-900">Your Tickets</h1>
+        <a href="{% url 'create_ticket' %}" class="btn-primary">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+            Create New Ticket
+        </a>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div class="flex items-center space-x-4">
+            <label for="status-filter" class="text-sm font-medium text-gray-700">Filter by Status:</label>
+            <select id="status-filter" 
+                    class="block w-48 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    hx-get="{% url 'ticket_list' %}" 
+                    hx-target="#ticket-container" 
+                    hx-trigger="change"
+                    hx-include="this"
+                    name="status">
+                {% for value, label in status_choices %}
+                    <option value="{{ value }}" {% if value == current_status %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <!-- Tickets Container -->
+    <div id="ticket-container">
+        {% include 'tickets/ticket_list_partial.html' %}
+    </div>
 </div>
-
-<div id="ticket-container">
-    {% include 'tickets/ticket_list_partial.html' %}
-</div>
+{% endblock %}

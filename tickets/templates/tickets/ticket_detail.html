@@ -1,16 +1,96 @@
-<h1>{{ ticket.title }}</h1>
-<p><strong>Description:</strong> {{ ticket.description }}</p>
-<p><strong>Priority:</strong> {{ ticket.get_priority_display }}</p>
-<p><strong>Status:</strong> {{ ticket.get_status_display }}</p>
-<p><strong>Created At:</strong> {{ ticket.created_at|date:"Y-m-d H:i" }}</p>
-<p><strong>Last Updated:</strong> {{ ticket.updated_at|date:"Y-m-d H:i" }}</p>
-<p><strong>Assigned To:</strong> {{ ticket.assigned_to.username|default:"Unassigned" }}</p>
-<p><strong>Created By:</strong> {{ ticket.created_by.username }}</p>
-<a href="{% url 'ticket_list' %}" class="btn btn-secondary mt-3">Back to Ticket List</a>
-<a href="{% url 'update_ticket' ticket.pk %}" class="btn btn-warning mt-3">Edit Ticket</a>
-{% if ticket.status != 'resolved' and ticket.status != 'closed' %}
-<a href="{% url 'resolve_ticket' ticket.pk %}" class="btn btn-success mt-3" onclick="return confirm('Are you sure you want to resolve this ticket?')">Resolve Ticket</a>
-{% endif %}
-<a href="{% url 'create_ticket' %}" class="btn btn-primary mt-3">Create New Ticket</a>
+{% extends 'tickets/base_tickets.html' %}
+{% load static %}
 
+{% block title %}{{ ticket.title }}{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+            <h1 class="text-3xl font-bold text-gray-900">{{ ticket.title }}</h1>
+            <span class="status-badge status-{{ ticket.status }}">
+                {{ ticket.get_status_display }}
+            </span>
+            <span class="status-badge priority-{{ ticket.priority }}">
+                {{ ticket.get_priority_display }}
+            </span>
+        </div>
+    </div>
+
+    <!-- Ticket Details -->
+    <div class="bg-white shadow-sm rounded-lg border border-gray-200">
+        <div class="px-6 py-4 border-b border-gray-200">
+            <h2 class="text-lg font-medium text-gray-900">Ticket Details</h2>
+        </div>
+        <div class="px-6 py-4 space-y-6">
+            <div>
+                <h3 class="text-sm font-medium text-gray-900 mb-2">Description</h3>
+                <p class="text-gray-600 leading-relaxed">{{ ticket.description }}</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-900">Created By</h3>
+                        <p class="text-gray-600">{{ ticket.created_by.username }}</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-900">Created At</h3>
+                        <p class="text-gray-600">{{ ticket.created_at|date:"F d, Y \a\t H:i" }}</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-900">Assigned To</h3>
+                        <p class="text-gray-600">
+                            {% if ticket.assigned_to %}
+                                {{ ticket.assigned_to.username }}
+                            {% else %}
+                                <span class="text-gray-400 italic">Unassigned</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-900">Last Updated</h3>
+                        <p class="text-gray-600">{{ ticket.updated_at|date:"F d, Y \a\t H:i" }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex flex-wrap gap-3">
+        <a href="{% url 'ticket_list' %}" class="btn-secondary">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Ticket List
+        </a>
+        <a href="{% url 'update_ticket' ticket.pk %}" class="btn-warning">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+            Edit Ticket
+        </a>
+        {% if ticket.status != 'resolved' and ticket.status != 'closed' %}
+            <a href="{% url 'resolve_ticket' ticket.pk %}" class="btn-success" 
+               onclick="return confirm('Are you sure you want to resolve this ticket?')">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Resolve Ticket
+            </a>
+        {% endif %}
+        <a href="{% url 'create_ticket' %}" class="btn-primary">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+            Create New Ticket
+        </a>
+    </div>
+</div>
+{% endblock %}
 
