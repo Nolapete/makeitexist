@@ -5,6 +5,7 @@ Django==5.2.6
 django-environ==0.12.0
 django-filter==25.1
 djangorestframework==3.16.1
+iniconfig==2.3.0
 Markdown==3.9
 mypy_extensions==1.1.0
 packaging==25.0
@@ -12,7 +13,11 @@ pathspec==0.12.1
 phonenumbers==9.0.14
 pillow==11.3.0
 platformdirs==4.5.0
+pluggy==1.6.0
 psycopg2-binary==2.9.10
+Pygments==2.19.2
+pytest==8.4.2
+pytest-django==4.11.1
 python-decouple==3.8
 pytokens==0.2.0
 PyYAML==6.0.3

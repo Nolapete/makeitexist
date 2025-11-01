@@ -13,7 +13,7 @@
   }
   
   .ticket-title {
-    @apply text-lg font-semibold text-gray-900 hover:text-blue-600 transition-colors duration-150;
+    @apply text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors duration-150;
   }
   
   .ticket-meta {
