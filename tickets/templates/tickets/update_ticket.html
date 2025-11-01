@@ -1,0 +1,7 @@
+<h1>Update Ticket: {{ ticket.title }}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Update Ticket</button>
+</form>
+<a href="{% url 'ticket_detail' ticket.pk %}" class="btn btn-secondary mt-3">Cancel</a>
