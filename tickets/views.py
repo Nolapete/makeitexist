@@ -78,3 +78,11 @@ def resolve_ticket(request, pk):
     ticket.status = "resolved"
     ticket.save()
     return redirect("ticket_detail", pk=ticket.pk)
+
+
+@login_required
+def close_ticket(request, pk):
+    ticket = get_object_or_404(Ticket, pk=pk, created_by=request.user)
+    ticket.status = "closed"
+    ticket.save()
+    return redirect("ticket_detail", pk=ticket.pk)

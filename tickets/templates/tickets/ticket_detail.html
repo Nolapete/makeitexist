@@ -96,6 +96,16 @@
                 Resolve Ticket
             </a>
         {% endif %}
+        <!-- Close Button (Red Outline Style) -->
+        {% if ticket.status != 'closed' %}
+            <a href="{% url 'close_ticket' ticket.pk %}" class="flex items-center px-4 py-2 border border-red-600 rounded-md shadow-sm text-sm font-medium text-red-600 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150"
+               onclick="return confirm('Are you sure you want to close this ticket?')">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+                Close Ticket
+            </a>
+        {% endif %}
         <!-- Create New Button (Primary Outline Style - Blue) -->
         <a href="{% url 'create_ticket' %}" class="flex items-center px-4 py-2 border border-blue-600 rounded-md shadow-sm text-sm font-medium text-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
