@@ -1,0 +1,20 @@
+<div class="accordion-container">
+    {% for ticket in tickets %}
+        <details>
+            <summary><a href="{% url 'ticket_detail' ticket.pk %}">{{ ticket.title }}</a></summary>
+            <div class="content">
+                <p><strong>Description:</strong> {{ ticket.description|truncatewords:20 }}</p>
+                <p><strong>Priority:</strong> {{ ticket.get_priority_display }} | <strong>Status:</strong> {{ ticket.get_status_display }}</p>
+                <p><strong>Created:</strong> {{ ticket.created_at|date:"Y-m-d H:i" }} | <strong>Updated:</strong> {{ ticket.updated_at|date:"Y-m-d H:i" }}</p>
+                <p><strong>Created By:</strong> {{ ticket.created_by.username }}</p>
+                {% if ticket.assigned_to %}
+                    <p><strong>Assigned To:</strong> {{ ticket.assigned_to.username }}</p>
+                {% else %}
+                    <p><strong>Assigned To:</strong> Unassigned</p>
+                {% endif %}
+            </div>
+        </details>
+    {% empty %}
+        <p>No tickets found for the selected status.</p>
+    {% endfor %}
+</div>

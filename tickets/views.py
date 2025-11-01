@@ -8,8 +8,32 @@ from .forms import TicketForm
 
 @login_required
 def ticket_list(request):
-    tickets = Ticket.objects.filter(created_by=request.user).order_by("-created_at")
-    return render(request, "tickets/ticket_list.html", {"tickets": tickets})
+    status_filter = request.GET.get('status', 'active')
+    
+    if status_filter == 'all':
+        tickets = Ticket.objects.filter(created_by=request.user).order_by("-created_at")
+    elif status_filter == 'resolved':
+        tickets = Ticket.objects.filter(created_by=request.user, status='resolved').order_by("-created_at")
+    elif status_filter == 'closed':
+        tickets = Ticket.objects.filter(created_by=request.user, status='closed').order_by("-created_at")
+    else:  # active (default)
+        tickets = Ticket.objects.filter(created_by=request.user).exclude(status__in=['resolved', 'closed']).order_by("-created_at")
+    
+    context = {
+        'tickets': tickets,
+        'current_status': status_filter,
+        'status_choices': [
+            ('active', 'Active'),
+            ('resolved', 'Resolved'),
+            ('closed', 'Closed'),
+            ('all', 'All'),
+        ]
+    }
+    
+    if request.headers.get('HX-Request'):
+        return render(request, "tickets/ticket_list_partial.html", context)
+    
+    return render(request, "tickets/ticket_list.html", context)
 
 
 @login_required

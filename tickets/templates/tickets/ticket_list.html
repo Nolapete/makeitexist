@@ -1,16 +1,22 @@
 {% load static %}
+<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
 <h1>Your Tickets</h1>
 <a href="{% url 'create_ticket' %}" class="btn btn-primary mb-3">Create New Ticket</a>
 
-<div class="accordion-container">
-    {% for ticket in tickets %}
-        <details>
-            <summary><a href="{% url 'ticket_detail' ticket.pk %}">{{ ticket.title }}</a> </summary>
-            <div class="content">
-                Priority: {{ ticket.get_priority_display }} | Status: {{ ticket.get_status_display }}
-                Last updated: {{ ticket.updated_at|date:"Y-m-d H:i" }}
-            </div>
-        </details>
-    {% empty %}
-        <li>No tickets found.</li>
-    {% endfor %}
+<div class="mb-3">
+    <label for="status-filter" class="form-label">Filter by Status:</label>
+    <select id="status-filter" class="form-select" 
+            hx-get="{% url 'ticket_list' %}" 
+            hx-target="#ticket-container" 
+            hx-trigger="change"
+            name="status">
+        {% for value, label in status_choices %}
+            <option value="{{ value }}" {% if value == current_status %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<div id="ticket-container">
+    {% include 'tickets/ticket_list_partial.html' %}
+</div>
