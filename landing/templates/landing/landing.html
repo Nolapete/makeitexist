@@ -98,7 +98,7 @@
     </div>
 </div>
 
-<!-- NEW: Staff Cards Section -->
+<!-- Staff Cards Section -->
 <div class="content-section">
     <div class="container">
         <h2 class="domain-header">Our Team</h2>
@@ -120,11 +120,60 @@
                 {% endif %}
             </div>
             {% empty %}
-                <p>No staff members to display.</p>            
+                <p>No staff members to display.</p>
             {% endfor %}
         </div>
     </div>
 </div>
+
+<!-- GitHub Commits Feed Section -->
+<div class="content-section github-feed-section">
+    <div class="container">
+        <h2 class="domain-header">Recent Development Activity</h2>
+
+        <!-- Loop 1: Group by Date -->
+        {% for date_obj, repos in commits_by_date_and_repo.items %}
+            <div class="date-group">
+                <!-- Date Header -->
+                <h3>{{ date_obj|date:"l, M d, Y" }}</h3>
+
+                <!-- Loop 2: Group by Repository -->
+                {% for repo_name, commits in repos.items %}
+                    <div class="repo-group">
+                        <!-- Display the Repo Header once per group -->
+                        <h4>
+                            Repository:
+                            <a href="{{ commits.0.repository.html_url }}" target="_blank">
+                                {{ commits.0.repository.owner }}/{{ repo_name }}
+                            </a>
+                        </h4>
+
+                        <!-- Loop 3: Display Commit Details as a list -->
+                        <ul class="commit-list">
+                            {% for commit in commits %}
+                                <li class="commit-item">
+                                    <!-- Only show SHA and Message now -->
+                                    <span class="commit-sha">
+                                        <code><a href="{{ commit.html_url }}" target="_blank" title="View Commit on GitHub">{{ commit.sha|slice:":7" }}</a></code>
+                                    </span>
+                                    <span class="commit-separator">—</span>
+                                    <span class="commit-message">
+                                        {{ commit.message|truncatechars:120 }}
+                                    </span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+            <hr> <!-- Separator between different dates -->
+        {% empty %}
+            <p>No commits found yet. Sync pending.</p>
+        {% endfor %}
+
+    </div>
+</div>
+<!-- End of GitHub Commits Feed Section -->
 
 <!-- Footer section -->
 <footer class="site-footer">

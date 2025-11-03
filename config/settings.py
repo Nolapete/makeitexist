@@ -38,6 +38,9 @@ if 'pytest' in sys.modules or 'test' in sys.argv:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
+GITHUB_PAT=env('GITHUB_PAT')
+GITHUB_USERNAME=env('GITHUB_USERNAME')
+
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
 # Application definition
@@ -49,10 +52,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # Third party
+    "rest_framework",
+
     "landing",
     "tickets",
     "pantry",
-    "rest_framework",
+    "github_feed",
+
 ]
 
 MIDDLEWARE = [
@@ -151,3 +159,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "UTC"
