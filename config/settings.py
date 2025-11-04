@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "tickets",
     "pantry",
     "github_feed",
+    "blog",
 
 ]
 

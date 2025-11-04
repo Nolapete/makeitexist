@@ -14,6 +14,7 @@ class Repository(models.Model):
     class Meta:
         # We will use this to sort repositories alphabetically later
         ordering = ['name']
+        verbose_name_plural = "Repositories"
 
 class Commit(models.Model):
     """Stores individual commit information."""

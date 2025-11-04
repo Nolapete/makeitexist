@@ -1,0 +1,37 @@
+{% load static %}
+<!-- makeitexist/templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Define a block for the title, with a default value -->
+    <title>{% block title %}makeitexist.net{% endblock %}</title>
+    <!-- You would add global CSS/JS links here -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <header>
+        <!-- Navigation Bar goes here, consistent across all pages -->
+        <nav>
+            <a href="{% url 'landing' %}">Home</a> |
+            <a href="{% url 'blog:post_list' %}">Blog</a> |
+            <a href="{% url 'admin:index' %}">Admin</a>
+            <!-- ... other links ... -->
+        </nav>
+    </header>
+
+    <main>
+        <!-- This is the main content area that other templates fill in -->
+        {% block content %}
+
+        {% endblock %}
+    </main>
+
+    <footer>
+        <!-- Footer consistent across all pages -->
+        <p>&copy; 2025 makeitexist.net</p>
+    </footer>
+
+</body>
+</html>

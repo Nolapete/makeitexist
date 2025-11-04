@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Blog Posts{% endblock %}
+
+{% block content %}
+    <h1>Blog Posts</h1>
+    {% for post in posts %}
+        <div class="post-summary">
+            <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+            <p class="post-meta">
+                Posted on {{ post.pub_date|date:"F d, Y" }}
+                by {{ post.author.get_full_name|default:post.author.username }}
+                {% if post.category %} in {{ post.category.name }}{% endif %}
+            </p>
+
+            <div class="summary-content">
+                <!-- post.summary is just plain text generated in the view, no |safe needed -->
+                {{ post.summary }}
+            </div>
+
+            <p><a href="{{ post.get_absolute_url }}">Read more</a></p>
+        </div>
+        <hr>
+    {% empty %}
+        <p>No blog posts published yet.</p>
+    {% endfor %}
+{% endblock %}
