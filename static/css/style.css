@@ -63,7 +63,7 @@ html, body {
 
 /* Specific parallax overlays for other sections */
 .parallax-2 .foreground-layer {
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .parallax-3 .foreground-layer {

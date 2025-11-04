@@ -1,0 +1,47 @@
+<!-- landing/templates/landing/partials/_highlights_section.html -->
+
+<!-- Highlights/Latest News Section (Extra! Extra!) -->
+<div class="content-section highlights-section">
+    <div class="container">
+        <h2 class="domain-header">Hot Off The Presses!</h2>
+        <div class="card-grid highlights-grid">
+
+            <!-- Latest Blog Post Highlight -->
+            {% if latest_blog_post %}
+            <div class="highlight-card">
+                <h3><i class="fas fa-newspaper"></i> Latest Blog Post</h3>
+                <p>
+                    <a href="{{ latest_blog_post.get_absolute_url }}">{{ latest_blog_post.title }}</a>
+                </p>
+                <span class="highlight-date">{{ latest_blog_post.pub_date|date:"M d, Y" }}</span>
+            </div>
+            {% endif %}
+
+            <!-- Latest Project Highlight -->
+            {% if latest_project %}
+            <div class="highlight-card">
+                <h3><i class="fas fa-rocket"></i> Newest Project</h3>
+                <p>
+                    <a href="{{ latest_project.project_url }}">{{ latest_project.title }}</a>
+                </p>
+                <span class="highlight-date">Check it out now!</span>
+            </div>
+            {% endif %}
+
+            <!-- Latest GitHub Commit Highlight -->
+            {% if latest_commit %}
+            <div class="highlight-card">
+                <h3><i class="fab fa-github"></i> Latest Code Commit</h3>
+                <p>
+                    <a href="{{ latest_commit.html_url }}" title="{{ latest_commit.message }}">
+                        {{ latest_commit.message|truncatechars:80 }}
+                    </a>
+                </p>
+                <span class="highlight-date">{{ latest_commit.date|date:"M d, Y H:i" }} UTC</span>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+<!-- End Highlights Section -->

@@ -1,0 +1,34 @@
+<!-- landing/templates/landing/partials/_core_apps_section.html -->
+
+<!-- config.net apps Section -->
+<div class="content-section">
+    <div class="container">
+        <h2 class="domain-header">Our Core Apps</h2>
+        <div class="card-grid">
+            {% for project in makeitexist_apps %}
+                <div class="project-card{% if project.is_featured %} is-featured{% endif %}">
+                    <div class="card-header-text">
+                        <h3>{{ project.title }}</h3>
+                        {% if project.display_domain %}
+                            <a href="{{ project.project_url }}" target="_blank" class="card-domain-link">{{ project.display_domain }}</a>
+                        {% endif %}
+                    </div>
+                    <div class="card-image-frame">
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                    </div>
+                    <p>{{ project.description }}</p>
+                    <div class="tech-stack-container">
+                        <div class="tech-icons">
+                            {% for icon_class in project.get_tech_icons %}
+                                <i class="{{ icon_class }}"></i>
+                            {% endfor %}
+                        </div>
+                        <p class="technologies-text">{{ project.technologies }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No `makeitexist` projects yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
