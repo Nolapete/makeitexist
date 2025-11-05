@@ -1,0 +1,24 @@
+[
+  {
+    "model": "blog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Troubleshooting",
+      "slug": "troubleshooting"
+    }
+  },
+  {
+    "model": "blog.post",
+    "pk": 3,
+    "fields": {
+      "title": "Debugging the GitHub Feed: Celery, Redis, and the Elusive 401 Error",
+      "slug": "debugging-github-feed-celery-redis-401-error",
+      "content": "## Debugging the GitHub Feed: Celery, Redis, and the Elusive 401 Error\n\nWhen setting up the `github_feed` application locally for the first time, several friction points emerged related to environment configuration, pathing, and authentication. The primary issue preventing the feed from working was a consistent `401 Client Error: Unauthorized`.\n\nHere are the key discoveries and troubleshooting steps required to get the feed working in a local development environment.\n\n### 1. Redis-Server (The Message Broker)\n\nThe Redis server configuration was correctly defined in `settings.py` (`CELERY_BROKER_URL = \"redis://localhost:6379/0\"`), but running the local instance was tricky.\n\n*   **The Issue:** Attempting to manually start Redis with `redis-server` locally failed because the port was already in use.\n*   **The Fix:** We discovered a Redis instance was already running on the development machine. The solution was simply to stop trying to start a second server and rely on the already active service.\n\n**Key Takeaway:** Ensure only one Redis instance is active and reachable via the configured URL.\n\n### 2. Celery Worker (The Task Runner)\n\nThe local Celery worker process couldn't be started successfully due to pathing inconsistencies.\n\n*   **The Issue 1 (Module Not Found):** The command `celery -A makeitexist worker` failed because the application's configuration module was named `config`, not `makeitexist`.\n*   **The Fix 1:** The command needed to be run from the correct directory using the right module name: `celery -A config worker --loglevel=info`.\n*   **The Issue 2 (Generic Service Names in Prod):** In the production Linode environment, services were named generically (`celery-worker.service`) rather than project-specifically (`makeitexist_...`).\n*   **The Fix 2:** The production service files were renamed to `makeitexist_celery_worker.service` and `makeitexist_celery_beat.service` for clarity and safe, project-specific management via systemd and the new deployment script.\n\n### 3. Debugging and Data Integrity\n\nThe core reason the feed produced no data was the consistent `401 Client Error: Unauthorized` response from the GitHub API.\n\n*   **The Root Cause (User Error):** The `GITHUB_PAT` (Personal Access Token) was either missing, expired, or truncated during a copy/paste operation (copied from a non-maximized terminal window).\n*   **The Technical Fix:** The Django application used `django-environ` to load the PAT from a local `.env` file. We used temporary `print()` statements in `settings.py` to verify the actual value being read by Python, confirming the *value itself* was the problem.\n*   **The Result:** Once a valid token was provided, API calls succeeded. Logs confirmed data synchronization was successful, resolving the admin panel issue.\n\nBy systematically addressing environment pathing for the Celery worker, confirming the validity of the GitHub PAT, and verifying Redis operation, the local development environment became fully operational.",
+      "pub_date": "2025-11-05T09:00:00Z",
+      "author": 1,
+      "category": 3,
+      "is_published": true,
+      "excerpt": "Key discoveries and troubleshooting steps for setting up the Django GitHub feed locally, focusing on Celery worker configuration, Redis setup, and resolving the infamous 401 Unauthorized API error."
+    }
+  }
+]
