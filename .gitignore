@@ -1,51 +1,97 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
+# .gitignore needs to be fixed up
 
-# Django-specific files
+# -------------------------------------------------------------
+# Operating System & IDE Files
+# -------------------------------------------------------------
+# macOS
+.DS_Store
+# Windows
+Thumbs.db
+
+# IDE specific files (PyCharm, VS Code, etc.)
+# IDE-specific files and folders
+.idea/          # PyCharm project files
+.vscode/        # VS Code settings
+
+# -------------------------------------------------------------
+# General Build Artifacts and Distribution
+# -------------------------------------------------------------
+# Ignore build artifacts and distribution files
+# Distribution / packaging
+bin/
+build/
+/dist/
 *.log
-*.pot
-db.sqlite3  # Default SQLite database file
-/media/      # User-uploaded media files
-/static/     # Collected static files (can be uncommented if you use a build process)
+share/
 
-# Virtual environment
+# Compiled assets (if you use front-end build tools)
+/node_modules/
+
+# -------------------------------------------------------------
+# Python Specific Ignores
+# -------------------------------------------------------------
+# Python
+# Byte-code files
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyd
+*.pyo
+*.py[co]
+__pycache__/
+
+# Virtual environments
 # Ignore the virtual environment folder to keep it out of version control.
-# Common names include:
+# Virtual environment (generic names)
+.Python
 env/
-venv/
+ENV/
+include/
+lib/
 .venv/
+venv/
+*_env             # Custom Virtual environments (specific to your 'first letter' naming convention)
 
+# Installer logs
+pip-delete-this-directory.txt
+pip-log.txt
+*.egg-info/
+*.pot
+
+# Test and coverage files
+# Testing and coverage
+.coverage
+/htmlcov/
+.tox/
+
+# -------------------------------------------------------------
+# Django / Configuration Files
+# -------------------------------------------------------------
 # Environment variables
 # This file contains sensitive information like API keys and database passwords.
 .env
+*.env
+.env-sample
+# Django-environ secrets file
 
-# IDE-specific files and folders
-# Visual Studio Code
-.vscode/
-# PyCharm
-.idea/
+# SQLite database file
+db.sqlite3      # Default SQLite database file
+/sqlite.db
 
-# Operating System files
-# Windows
-Thumbs.db
-# macOS
-.DS_Store
+# Media and Static Files (Generated/Uploaded by users)
+/media/         # User-uploaded media files
+/static/        # Collected static files (can be uncommented if you use a build process)
 
-# Test and coverage files
-.coverage
-htmlcov/
-.tox/
+# Prevents committing server-specific configuration
+# If you have specific names like "site_a.ini", add them here
+# site_a.ini
+# UWSGI Configuration Files
+uwsgi.ini
+*_uwsgi.py
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Distribution / packaging
-# Ignore build artifacts and distribution files
-build/
-dist/
-*.egg-info/
+# -------------------------------------------------------------
+# Other / Misc
+# -------------------------------------------------------------
+*~              # Common names include:
 .aider*
+*.sublime-project
+*.sublime-workspace
