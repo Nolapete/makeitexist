@@ -1,10 +1,10 @@
 # pantry/admin.py
 
-from django.contrib import admin
 from django import forms
+from django.contrib import admin
 from django.utils.html import format_html
-from .models import Location, StorageUnit, PantryItem, Stock, ItemCategory
 
+from .models import ItemCategory, Location, PantryItem, Stock, StorageUnit
 
 # =============================================================================
 # 1. Utility Functions (DRY)
@@ -44,7 +44,7 @@ class StorageUnitAdminForm(forms.ModelForm):
 
     class Meta:
         model = StorageUnit
-        exclude = ["temperature"]  # Handled by clean()
+        fields = ["name", "unit_type", "location", "notes"]  # Handled by clean()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -154,7 +154,8 @@ class StorageUnitAdmin(admin.ModelAdmin):
             "Temperature Settings",
             {
                 "fields": ("temperature_celsius", "temperature_fahrenheit"),
-                "description": "Enter temperature in Celsius or Fahrenheit. Automatically converted and stored in Celsius.",
+                "description": "Enter temperature in Celsius or Fahrenheit. "
+                "Automatically converted and stored in Celsius.",
             },
         ),
         ("Additional Info", {"fields": ("notes",), "classes": ("collapse",)}),

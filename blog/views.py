@@ -1,10 +1,11 @@
 # blog/views.py
-from django.shortcuts import render, get_object_or_404
-from .models import Post
 import markdown
+from django.shortcuts import get_object_or_404, render
 from django.utils.html import strip_tags  # Import this helper
 
-MD_EXTENSIONS = ['fenced_code']
+from .models import Post
+
+MD_EXTENSIONS = ["fenced_code"]
 
 
 def post_list(request):
@@ -20,8 +21,8 @@ def post_list(request):
         # 4. Store plain text summary temporarily on the object
         post.summary = truncated_text
 
-    context = {'posts': posts}
-    return render(request, 'blog/post_list.html', context)
+    context = {"posts": posts}
+    return render(request, "blog/post_list.html", context)
 
 
 def post_detail(request, slug):
@@ -31,7 +32,7 @@ def post_detail(request, slug):
     html_content = markdown.markdown(post.content, extensions=MD_EXTENSIONS)
 
     context = {
-        'post': post,
-        'html_content': html_content,  # Pass the new HTML content
+        "post": post,
+        "html_content": html_content,  # Pass the new HTML content
     }
-    return render(request, 'blog/post_detail.html', context)
+    return render(request, "blog/post_detail.html", context)

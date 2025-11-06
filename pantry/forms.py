@@ -1,5 +1,6 @@
 from django import forms
-from .models import Location, StorageUnit, PantryItem
+
+from .models import Location, PantryItem, StorageUnit
 
 
 class LocationForm(forms.ModelForm):

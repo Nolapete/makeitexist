@@ -1,18 +1,21 @@
+# ruff: noqa: S101, W0621, S106
+
 import pytest
 from django.contrib.auth.models import User
-from tickets.models import Ticket, STATUS_CHOICES, PRIORITY_CHOICES
+
+from tickets.models import PRIORITY_CHOICES, STATUS_CHOICES, Ticket
 
 pytestmark = pytest.mark.django_db
 
 
 @pytest.fixture
 def create_user():
-    return User.objects.create_user(username='testuser', password='password123')
+    return User.objects.create_user(username="testuser", password="password123")
 
 
 @pytest.fixture
 def create_assigned_user():
-    return User.objects.create_user(username='assigneduser', password='password123')
+    return User.objects.create_user(username="assigneduser", password="password123")
 
 
 def test_ticket_creation(create_user):
@@ -42,7 +45,7 @@ def test_ticket_with_assignment(create_user, create_assigned_user):
         description="This ticket has an assignee.",
         created_by=creator,
         assigned_to=assignee,
-        status="in_progress"
+        status="in_progress",
     )
 
     assert ticket.assigned_to == assignee

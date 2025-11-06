@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("landing", "0002_project_tech_icons_alter_project_technologies"),
     ]

@@ -1,5 +1,5 @@
-from django.db import models
 from django.core.validators import RegexValidator
+from django.db import models
 
 
 class Project(models.Model):
@@ -11,7 +11,8 @@ class Project(models.Model):
     tech_icons = models.CharField(
         max_length=500,
         blank=True,
-        help_text="Font Awesome icon classes, separated by commas (e.g., 'fab fa-python, fab fa-django').",
+        help_text="Font Awesome icon classes, separated by"
+        " commas (e.g., 'fab fa-python, fab fa-django').",
     )
     image = models.ImageField(upload_to="project_images/")
     project_url = models.URLField(
@@ -23,7 +24,6 @@ class Project(models.Model):
     display_domain = models.CharField(
         max_length=100,
         blank=True,
-        null=True,
         help_text="The domain name to display (e.g., clownfishgenetics.org)",
     )
     is_featured = models.BooleanField(
@@ -44,7 +44,8 @@ class StaffMember(models.Model):
     email = models.EmailField()
     phone_regex = RegexValidator(
         regex=r"^\+?1?\d{9,15}$",
-        message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.",
+        message="Phone number must be entered in the format:"
+        "'+999999999'. Up to 15 digits allowed.",
     )
     phone = models.CharField(validators=[phone_regex], max_length=17, blank=True)
     photo = models.ImageField(upload_to="staff_photos/", blank=True)

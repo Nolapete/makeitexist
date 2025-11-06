@@ -1,19 +1,23 @@
+# ruff: noqa: S101, W0621, S106
 # config/test_settings.py
 
-from django.conf import settings
 import os
+
+from django.conf import settings
 
 # These tests will run using the configuration loaded by pytest.ini
 # By default, during testing, DEBUG will be False if not explicitly set to True.
+
 
 def test_debug_setting():
     """Ensure DEBUG is False when running tests (default for Django test env)."""
     assert settings.DEBUG is False
 
+
 def test_secret_key_is_loaded():
     """Ensure the SECRET_KEY is loaded from the environment and is not empty."""
     assert settings.SECRET_KEY is not None
-    assert settings.SECRET_KEY != ''
+    assert settings.SECRET_KEY != ""
     # Optional: ensure it's not the default insecure key used during project creation
     # assert 'django-insecure-' not in settings.SECRET_KEY
 
@@ -31,7 +35,9 @@ def test_app_configurations():
     for app in expected_apps:
         assert app in settings.INSTALLED_APPS
 
+
 # --- Static/Media Files Best Practices ---
+
 
 def test_static_url_and_root():
     """Verify static file configuration best practices."""

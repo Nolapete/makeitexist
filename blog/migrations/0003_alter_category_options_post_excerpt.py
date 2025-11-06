@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("blog", "0002_category_slug_post_is_published_alter_post_pub_date_and_more"),
     ]

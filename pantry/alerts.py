@@ -1,7 +1,5 @@
-from django.core.mail import send_mail
 from django.conf import settings
-
-from .models import Item
+from django.core.mail import send_mail
 
 
 def send_alert(user, subject, message):

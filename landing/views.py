@@ -1,10 +1,12 @@
 # landing/views.py
-from django.shortcuts import render
 from collections import defaultdict
-from .models import Project, StaffMember
+
+from django.shortcuts import render
+
+from blog.models import Post  # Import the Post model
 from github_feed.models import Commit
-from blog.models import Post # Import the Post model
-from django.utils import timezone
+
+from .models import Project, StaffMember
 
 
 def landing_page(request):
@@ -12,9 +14,9 @@ def landing_page(request):
     external_projects = Project.objects.filter(is_makeitexist_app=False)[:4]
     staff_members = StaffMember.objects.all()
 
-    all_commits = Commit.objects.all() \
-        .select_related('repository') \
-        .order_by('-date')[:100]
+    all_commits = (
+        Commit.objects.all().select_related("repository").order_by("-date")[:100]
+    )
 
     # Group commits by Date Object -> Repo Name -> List of Commits
     grouped_commits = defaultdict(lambda: defaultdict(list))
@@ -33,11 +35,17 @@ def landing_page(request):
         commits_display_data[date_obj] = sorted_repos
 
     # Sort the outer dictionary by date keys (reverse chronological)
-    sorted_commits_display_data = dict(sorted(commits_display_data.items(), reverse=True))
+    sorted_commits_display_data = dict(
+        sorted(commits_display_data.items(), reverse=True)
+    )
 
     # --- NEW: Fetch Highlight Data ---
-    latest_blog_post = Post.objects.filter(is_published=True).order_by('-pub_date').first()
-    latest_project = Project.objects.order_by('-id').first() # Assuming higher ID is newer
+    latest_blog_post = (
+        Post.objects.filter(is_published=True).order_by("-pub_date").first()
+    )
+    latest_project = Project.objects.order_by(
+        "-id"
+    ).first()  # Assuming higher ID is newer
     # The latest commit is just the first one in your already-fetched list
     latest_commit = all_commits.first()
 
@@ -47,7 +55,6 @@ def landing_page(request):
         "staff_members": staff_members,
         # Pass the newly structured data grouped by date and repo
         "commits_by_date_and_repo": sorted_commits_display_data,
-
         # Add the highlight items to the context
         "latest_blog_post": latest_blog_post,
         "latest_project": latest_project,

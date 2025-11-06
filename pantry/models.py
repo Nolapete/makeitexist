@@ -6,7 +6,7 @@ from django.db import models
 
 class Location(models.Model):
     name = models.CharField(max_length=100)
-    address = models.TextField(blank=True, null=True)
+    address = models.TextField(blank=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -31,7 +31,7 @@ class StorageUnit(models.Model):
     temperature = models.DecimalField(
         max_digits=5, decimal_places=1, blank=True, null=True
     )
-    notes = models.TextField(blank=True, null=True)
+    notes = models.TextField(blank=True)
 
     def __str__(self):
         return f"{self.get_unit_type_display()} - {self.name} ({self.location})"
@@ -81,10 +81,13 @@ class Stock(models.Model):
     quantity = models.PositiveIntegerField()
     expiry_date = models.DateField(blank=True, null=True)
     purchase_date = models.DateField(default=date.today)
-    batch_number = models.CharField(max_length=100, blank=True, null=True)
+    batch_number = models.CharField(max_length=100, blank=True)
 
     class Meta:
         verbose_name_plural = "Stock"
+
+    def __str__(self):
+        return f"{self.item.name} - {self.quantity} in {self.storage_unit}"
 
     def is_expired(self):
         return self.expiry_date and self.expiry_date < date.today()
@@ -93,6 +96,3 @@ class Stock(models.Model):
         if not self.expiry_date:
             return None
         return (self.expiry_date - date.today()).days
-
-    def __str__(self):
-        return f"{self.item.name} - {self.quantity} in {self.storage_unit}"
