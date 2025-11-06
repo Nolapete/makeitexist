@@ -1,0 +1,15 @@
+[
+  {
+    "model": "blog.post",
+    "fields": {
+      "title": "Migrating to a Modern Django Workflow: UV, Ruff, and CD",
+      "slug": "modern-django-workflow-uv-ruff-cd",
+      "content": "## Introduction\n\nWe recently undertook a significant migration across our five Django projects to streamline development, improve code quality, and automate deployments. This process involved adopting several modern Python tools and updating our operational practices.\n\n### Key Migrations & Best Practices Implemented\n\n**1. From Pip to UV (The Speed Upgrade)**\nWe replaced `pip` and `pip-tools` with `uv`, a next-generation package manager written in Rust. `uv` provides blazing-fast dependency resolution and installation. We standardized on `uv sync --active` for production deployments, resulting in significantly faster deployment times.\n\n**2. Consolidating Linters with Ruff**\nWe retired older tools (`flake8`, `isort`, `django-lint`, `black`) in favor of the all-in-one `ruff` linter and formatter. Ruff is highly configurable via `pyproject.toml` and enforces code standards efficiently.\n\n**3. Robust Pre-Commit Hooks**\nWe configured `.pre-commit-config.yaml` to run Ruff (lint and format) automatically before every commit. This proactive quality control prevents stylistic errors from entering the Python codebase.\n\n**4. Enhanced Deployment Automation**\nOur existing `project_manager.sh` script was updated to use `uv sync --active`, handle custom `firstletter_env` virtual environment paths, manage the `uwsgi` dependency, and reliably deploy from the new `main` branch. This script automates fetching code, running migrations and static collection, loading fixtures, and restarting services.\n\n**5. Standardization**\nWe standardized branch naming from `master` to `main` across all repositories and environments for a modern, clear workflow.\n\nThese changes provide a foundation for highly efficient, secure, and automated development and deployment of all our Django websites.",
+      "pub_date": "2025-11-05T18:00:00Z",
+      "author": 2,
+      "category": 2,
+      "is_published": true,
+      "excerpt": "A summary of our migration to modern Django development practices using UV, Ruff, pre-commit hooks, and a fully automated deployment pipeline."
+    }
+  }
+]
