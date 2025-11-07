@@ -54,30 +54,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Third party
     "rest_framework",
+    # Apps
     "landing",
     "tickets",
     "pantry",
     "github_feed",
     "blog",
-    "ninja",
-    "wagtail",
-    "modelcluster",
-    "taggit",
-    "wagtail.contrib.forms",
-    "wagtail.contrib.redirects",
-    "wagtail.embeds",
-    "wagtail.sites",
-    "wagtail.users",
-    "wagtail.admin",
-    "wagtail.documents",
-    "wagtail.images",
-    "wagtail.search",
-    "wagtail.snippets",
-    "wagtail.contrib.sitemaps",
-    "django.contrib.sites",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
+    "recipe",
 ]
 
 MIDDLEWARE = [
@@ -88,9 +71,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "allauth.account.middleware.AccountMiddleware",
-    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
-    "wagtail.contrib.sites.middleware.SiteMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -194,14 +174,3 @@ CELERY_BEAT_SCHEDULE = {
         "schedule": timedelta(hours=1),
     },
 }
-
-WAGTAILADMIN_BASE_URL = "http://localhost:8000"
-
-SITE_ID = 1
-
-AUTHENTICATION_BACKENDS = [
-    (
-        "django.contrib.auth.backends.ModelBackend",
-        "allauth.account.auth_backends.AuthenticationBackend",
-    ),
-]

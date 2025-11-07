@@ -34,13 +34,9 @@ dependencies = [
     "diskcache==5.6.3",
     "distro==1.9.0",
     "django==5.2.6",
-    "django-allauth>=65.13.0",
-    "django-crm>=0.9.0",
     "django-environ==0.12.0",
     "django-filter==25.1",
     "django-htmx==1.26.0",
-    "django-ninja>=1.4.5",
-    "django-oscar>=4.1",
     "djangorestframework==3.16.1",
     "docstring-parser==0.17.0",
     "filelock==3.18.0",
@@ -155,7 +151,6 @@ dependencies = [
     "urllib3==2.5.0",
     "uv==0.9.7",
     "vine==5.1.0",
-    "wagtail>=7.2",
     "watchfiles==1.1.0",
     "wcwidth==0.2.13",
     "yarl==1.20.1",
@@ -163,32 +158,18 @@ dependencies = [
 ]
 
 [tool.ruff]
-# Match black's default line length
+# Consistent Ruff settings: exclude migrations and set a consistent line length
 exclude = ["**/migrations/*.py"]
-force-exclude = true
 line-length = 88
-target-version = "py312" # Set your target Python version
 
 [tool.ruff.lint]
-# Enable Flake8's F, E, W rules by default, plus some extras
+# Enable a comprehensive set of rules including security and Django specific checks
 select = ["E", "W", "F", "I", "UP", "B", "C4", "DJ", "S"]
-# E: pycodestyle errors
-# W: pycodestyle warnings
-# F: Pyflakes
-# I: isort (import sorting)
-# UP: pyupgrade (modernizing syntax)
-# B: flake8-bugbear (common issues)
-# C4: flake8-comprehensions
-# DJ: Django-specific rules
-# S: bandit (security issues)
 
-
-
-# Ignore some specific rules if needed, e.g., missing docstrings
-ignore = ["D100", "D101", "D102", "D103", "D104"]
+# Ignore rules related to missing documentation strings (D-codes from pydocstyle)
+ignore = ["D100", "D101", "D102", "D103", "D104", "S101"]
 
 [tool.ruff.format]
-# Enable Ruff's highly performant formatter as a drop-in Black replacement
-# It is recommended to use ruff format instead of black now
+# Consistent formatting style: double quotes and spaces
 quote-style = "double"
 indent-style = "space"
