@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "pantry",
     "github_feed",
     "blog",
+    "recipe",
 ]
 
 MIDDLEWARE = [
@@ -103,8 +104,7 @@ DATABASES = {"default": env.db()}
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": (
-            "django.contrib.auth.password_validation."
-            "UserAttributeSimilarityValidator"
+            "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
         ),
     },
     {

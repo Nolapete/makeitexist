@@ -16,6 +16,7 @@ urlpatterns = [
     path("tickets/", include("tickets.urls")),
     path("pantry/", include("pantry.urls")),
     path("api/pantry/", include("pantry.api_urls")),
+    path("recipes/", include("recipe.urls")),
     path(
         "accounts/", include("django.contrib.auth.urls")
     ),  # For login, logout, password management

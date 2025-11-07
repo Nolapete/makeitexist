@@ -1,0 +1,26 @@
+# .github/workflows/deploy.yml
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Linode Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 45.56.126.187
+          username: pete
+          key: ${{ secrets.LINODE_SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.LINODE_SSH_PASSPHRASE }}
+          script: |
+            cd /var/www
+            # Run the script using sudo, which no longer asks for a password
+            sudo ./project_manager.sh makeitexist deploy
