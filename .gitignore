@@ -80,6 +80,9 @@ db.sqlite3      # Default SQLite database file
 # Media and Static Files (Generated/Uploaded by users)
 /media/         # User-uploaded media files
 /static/        # Collected static files (can be uncommented if you use a build process)
+/staticfiles/
+/staticfiles_collected/
+
 
 # Prevents committing server-specific configuration
 # If you have specific names like "site_a.ini", add them here

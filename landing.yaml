@@ -13,7 +13,8 @@
   pk: 2
   fields:
     title: St. Joseph Altar
-    description: Information about the traditions of St. Joseph Altars in the New
+    description:
+      Information about the traditions of St. Joseph Altars in the New
       Orleans area.  Listings of all known altars and route planning for the season.
     technologies: Django, PostgreSQL, HTML, CSS
     tech_icons: fab fa-django, fab fa-postgresql, fab fa-html5, fab fa-css3
@@ -25,7 +26,8 @@
   pk: 3
   fields:
     title: Pantry Management
-    description: Pantry management to track inventory, restocking, and expiry.  Convenient
+    description:
+      Pantry management to track inventory, restocking, and expiry.  Convenient
       shopping list sent to your phone.
     technologies: Django, PostgreSQL, HTML, CSS
     tech_icons: fab fa-django, fab fa-postgresql, fab fa-html5, fab fa-css3
@@ -37,7 +39,8 @@
   pk: 4
   fields:
     title: Tickets
-    description: Ticketing system that is more than just a todo list.  Inspired by
+    description:
+      Ticketing system that is more than just a todo list.  Inspired by
       Freshdesk and what we wished it did.
     technologies: Django, PostgreSQL, HTML, CSS
     tech_icons: fab fa-django, fab fa-postgresql, fab fa-html5, fab fa-css3

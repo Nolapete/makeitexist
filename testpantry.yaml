@@ -19,7 +19,7 @@
     unit_type: pantry
     location: 2
     temperature: null
-    notes: ''
+    notes: ""
 - model: pantry.storageunit
   pk: 2
   fields:
@@ -27,7 +27,7 @@
     unit_type: pantry
     location: 2
     temperature: null
-    notes: ''
+    notes: ""
 - model: pantry.storageunit
   pk: 3
   fields:
@@ -35,7 +35,7 @@
     unit_type: cabinet
     location: 1
     temperature: null
-    notes: ''
+    notes: ""
 - model: pantry.storageunit
   pk: 4
   fields:
@@ -51,7 +51,8 @@
     unit_type: freezer
     location: 1
     temperature: null
-    notes: This is the larger chest freezer to the right of the smaller refrigerator
+    notes:
+      This is the larger chest freezer to the right of the smaller refrigerator
       in the kitchen.
 - model: pantry.storageunit
   pk: 6
@@ -60,7 +61,7 @@
     unit_type: freezer
     location: 1
     temperature: null
-    notes: ''
+    notes: ""
 - model: pantry.storageunit
   pk: 7
   fields:
@@ -68,7 +69,7 @@
     unit_type: refrigerator
     location: 1
     temperature: null
-    notes: ''
+    notes: ""
 - model: pantry.storageunit
   pk: 8
   fields:
@@ -76,7 +77,7 @@
     unit_type: refrigerator
     location: 1
     temperature: null
-    notes: ''
+    notes: ""
 - model: pantry.storageunit
   pk: 9
   fields:
@@ -84,7 +85,7 @@
     unit_type: freezer
     location: 1
     temperature: null
-    notes: ''
+    notes: ""
 - model: pantry.storageunit
   pk: 10
   fields:
@@ -92,7 +93,7 @@
     unit_type: refrigerator
     location: 1
     temperature: null
-    notes: ''
+    notes: ""
 - model: pantry.storageunit
   pk: 11
   fields:
@@ -100,7 +101,7 @@
     unit_type: freezer
     location: 1
     temperature: null
-    notes: ''
+    notes: ""
 - model: pantry.storageunit
   pk: 12
   fields:
@@ -108,7 +109,7 @@
     unit_type: refrigerator
     location: 2
     temperature: null
-    notes: ''
+    notes: ""
 - model: pantry.storageunit
   pk: 13
   fields:
@@ -116,7 +117,7 @@
     unit_type: freezer
     location: 2
     temperature: null
-    notes: ''
+    notes: ""
 - model: pantry.storageunit
   pk: 14
   fields:
@@ -124,7 +125,7 @@
     unit_type: refrigerator
     location: 2
     temperature: null
-    notes: ''
+    notes: ""
 - model: pantry.storageunit
   pk: 15
   fields:
@@ -132,4 +133,4 @@
     unit_type: freezer
     location: 2
     temperature: null
-    notes: ''
+    notes: ""

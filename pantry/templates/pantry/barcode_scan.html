@@ -1,155 +1,153 @@
 <!-- templates/pantry/barcode_scan.html -->
 {% extends "pantry/base.html" %}
-
 {% block title %}Scan Barcode{% endblock %}
-
 {% block content %}
-<h2>📱 Scan Barcode</h2>
-<p class="text-muted">Point your camera at a product barcode (UPC or EAN).</p>
-
-<div class="card mb-4">
-  <div class="card-body p-0">
-    <video id="video" width="100%" height="300" autoplay playsinline class="border-bottom" style="object-fit: cover;"></video>
-  </div>
-</div>
-
-<div class="alert alert-info d-none" id="scan-result">
-  <strong>Barcode:</strong> <span id="barcode-value"></span>
-</div>
-
-<div id="not-found" class="alert alert-warning d-none">
-  <strong>Not in Pantry:</strong> 
-  <span id="unknown-barcode"></span>
-  <a href="#" class="btn btn-sm btn-success ms-2" id="add-new-item-btn">Add New Item</a>
-</div>
-
-<div id="found-item" class="alert alert-success d-none">
-  <strong>Found:</strong> 
-  <span id="item-name"></span>
-  <div class="mt-2">
-    <a href="#" class="btn btn-sm btn-primary" id="add-to-stock-btn">Add to Stock</a>
-    <a href="#" class="btn btn-sm btn-outline-secondary" id="view-item-btn">View Item</a>
-  </a>
-</div>
-
-<a href="{% url 'pantry:location_list' %}" class="btn btn-link">← Back to Pantry</a>
-
+    <h2>📱 Scan Barcode</h2>
+    <p class="text-muted">Point your camera at a product barcode (UPC or EAN).</p>
+    <div class="card mb-4">
+        <div class="card-body p-0">
+            <video id="video"
+                   width="100%"
+                   height="300"
+                   autoplay
+                   playsinline
+                   class="border-bottom"
+                   style="object-fit: cover">
+            </video>
+        </div>
+    </div>
+    <div class="alert alert-info d-none" id="scan-result">
+        <strong>Barcode:</strong> <span id="barcode-value"></span>
+    </div>
+    <div id="not-found" class="alert alert-warning d-none">
+        <strong>Not in Pantry:</strong>
+        <span id="unknown-barcode"></span>
+        <a href="#" class="btn btn-sm btn-success ms-2" id="add-new-item-btn">Add New Item</a>
+    </div>
+    <div id="found-item" class="alert alert-success d-none">
+        <strong>Found:</strong>
+        <span id="item-name"></span>
+        <div class="mt-2">
+            <a href="#" class="btn btn-sm btn-primary" id="add-to-stock-btn">Add to Stock</a>
+            <a href="#" class="btn btn-sm btn-outline-secondary" id="view-item-btn">View Item</a>
+        </a>
+    </div>
+    <a href="{% url 'pantry:location_list' %}" class="btn btn-link">← Back to Pantry</a>
 {% endblock %}
-
 {% block extra_js %}
-<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
-<script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script>
   // DOM Elements
-  const video = document.getElementById('video');
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
+    const video = document.getElementById('video');
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
 
-  const scanResult = document.getElementById('scan-result');
-  const barcodeValue = document.getElementById('barcode-value');
+    const scanResult = document.getElementById('scan-result');
+    const barcodeValue = document.getElementById('barcode-value');
 
-  const notFound = document.getElementById('not-found');
-  const unknownBarcode = document.getElementById('unknown-barcode');
-  const addNewItemBtn = document.getElementById('add-new-item-btn');
+    const notFound = document.getElementById('not-found');
+    const unknownBarcode = document.getElementById('unknown-barcode');
+    const addNewItemBtn = document.getElementById('add-new-item-btn');
 
-  const foundItem = document.getElementById('found-item');
-  const itemName = document.getElementById('item-name');
-  const addToStockBtn = document.getElementById('add-to-stock-btn');
-  const viewItemBtn = document.getElementById('view-item-btn');
+    const foundItem = document.getElementById('found-item');
+    const itemName = document.getElementById('item-name');
+    const addToStockBtn = document.getElementById('add-to-stock-btn');
+    const viewItemBtn = document.getElementById('view-item-btn');
 
-  let scanning = true;
+    let scanning = true;
 
   // Request camera access
-  navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
-    .then(stream => {
-      video.srcObject = stream;
-      video.onloadedmetadata = () => {
-        video.play();
-        setTimeout(scanLoop, 500); // Start scanning after video loads
-      };
-    })
-    .catch(err => {
-      console.error("Camera access denied:", err);
-      alert("Unable to access camera. Please allow camera permissions or try on a mobile device.");
-      scanResult.classList.remove('d-none');
-      scanResult.innerHTML = "<strong>Camera not available.</strong> You can manually enter a barcode if needed.";
-    });
-
-  // Continuous scanning loop
-  function scanLoop() {
-    if (!scanning) return;
-
-    if (video.readyState === video.HAVE_ENOUGH_DATA) {
-      // Resize canvas to match video
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-      // Extract image data for scanning
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const code = jsQR(imageData.data, imageData.width, imageData.height, {
-        inversionAttempts: "dontInvert",
-      });
-
-      if (code) {
-        const barcode = code.data.trim();
-
-        // Prevent duplicate scans of the same code
-        if (barcode === barcodeValue.textContent) return;
-
-        scanning = false; // Stop scanning after success
-        handleBarcode(barcode);
-      }
-    }
-
-    // Use requestAnimationFrame for smooth, efficient loop
-    requestAnimationFrame(scanLoop);
-  }
-
-  // Handle scanned barcode
-  function handleBarcode(barcode) {
-    // Show scanned value
-    barcodeValue.textContent = barcode;
-    scanResult.classList.remove('d-none');
-
-    // Reset result states
-    notFound.classList.add('d-none');
-    foundItem.classList.add('d-none');
-
-    // Query Django API
-    fetch('{% url "pantry:api_barcode_scan" %}?barcode=' + encodeURIComponent(barcode))
-      .then(response => {
-        if (!response.ok) throw new Error('Network error');
-        return response.json();
-      })
-      .then(data => {
-        if (data.found) {
-          // Item exists in pantry
-          itemName.textContent = data.item.name;
-          foundItem.classList.remove('d-none');
-
-          // Set action links
-          addToStockBtn.href = `{% url "pantry:stock_add" %}?item=${data.item.id}`;
-          viewItemBtn.href = `{% url "pantry:pantry_item_detail" data.item.id %}`;
-        } else {
-          // Item not in pantry
-          unknownBarcode.textContent = barcode;
-          addNewItemBtn.href = `{% url "pantry:pantry_item_create" %}?barcode=${encodeURIComponent(barcode)}`;
-          notFound.classList.remove('d-none');
-        }
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+      .then(stream => {
+        video.srcObject = stream;
+        video.onloadedmetadata = () => {
+          video.play();
+          setTimeout(scanLoop, 500); // Start scanning after video loads
+        };
       })
       .catch(err => {
-        console.error("API lookup failed:", err);
-        alert("Failed to check pantry. Please check your connection and try again.");
+        console.error("Camera access denied:", err);
+        alert("Unable to access camera. Please allow camera permissions or try on a mobile device.");
+        scanResult.classList.remove('d-none');
+        scanResult.innerHTML = "<strong>Camera not available.</strong> You can manually enter a barcode if needed.";
       });
-  }
+
+  // Continuous scanning loop
+    function scanLoop() {
+      if (!scanning) return;
+
+      if (video.readyState === video.HAVE_ENOUGH_DATA) {
+      // Resize canvas to match video
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      // Extract image data for scanning
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height, {
+          inversionAttempts: "dontInvert",
+        });
+
+        if (code) {
+          const barcode = code.data.trim();
+
+        // Prevent duplicate scans of the same code
+          if (barcode === barcodeValue.textContent) return;
+
+          scanning = false; // Stop scanning after success
+          handleBarcode(barcode);
+        }
+      }
+
+    // Use requestAnimationFrame for smooth, efficient loop
+      requestAnimationFrame(scanLoop);
+    }
+
+  // Handle scanned barcode
+    function handleBarcode(barcode) {
+    // Show scanned value
+      barcodeValue.textContent = barcode;
+      scanResult.classList.remove('d-none');
+
+    // Reset result states
+      notFound.classList.add('d-none');
+      foundItem.classList.add('d-none');
+
+    // Query Django API
+      fetch('{% url "pantry:api_barcode_scan" %}?barcode=' + encodeURIComponent(barcode))
+        .then(response => {
+          if (!response.ok) throw new Error('Network error');
+          return response.json();
+        })
+        .then(data => {
+          if (data.found) {
+          // Item exists in pantry
+            itemName.textContent = data.item.name;
+            foundItem.classList.remove('d-none');
+
+          // Set action links
+            addToStockBtn.href = `{% url "pantry:stock_add" %}?item=${data.item.id}`;
+            viewItemBtn.href = `{% url "pantry:pantry_item_detail" data.item.id %}`;
+          } else {
+          // Item not in pantry
+            unknownBarcode.textContent = barcode;
+            addNewItemBtn.href = `{% url "pantry:pantry_item_create" %}?barcode=${encodeURIComponent(barcode)}`;
+            notFound.classList.remove('d-none');
+          }
+        })
+        .catch(err => {
+          console.error("API lookup failed:", err);
+          alert("Failed to check pantry. Please check your connection and try again.");
+        });
+    }
 
   // Optional: Restart scanning (if you add a "Scan Again" button)
-  window.restartScan = function() {
-    scanResult.classList.add('d-none');
-    notFound.classList.add('d-none');
-    foundItem.classList.add('d-none');
-    scanning = true;
-    setTimeout(scanLoop, 500);
-  };
-</script>
-{% endblock %}   
+    window.restartScan = function() {
+      scanResult.classList.add('d-none');
+      notFound.classList.add('d-none');
+      foundItem.classList.add('d-none');
+      scanning = true;
+      setTimeout(scanLoop, 500);
+    };
+    </script>
+{% endblock %}

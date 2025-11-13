@@ -1,72 +1,68 @@
 {% extends "pantry/base.html" %}
-
-{% block title %}{{ location.name }}{% endblock %}
-
+{% block title %}
+    {{ location.name }}
+{% endblock
+%}
 {% block content %}
-<h2>{{ location.name }}</h2>
-{% if location.address %}
-  <p class="text-muted">{{ location.address }}</p>
-{% endif %}
-
-<h3 class="mt-4">Storage Units</h3>
-
-{% if storage_units %}
-  <div class="row g-3">
-    {% for unit in storage_units %}
-      <div class="col-md-6 col-lg-4">
-        <div class="card h-100 shadow-sm border-light">
-          <div class="card-body d-flex flex-column">
-            <div class="d-flex align-items-center mb-2">
-              <h5 class="mb-0 flex-grow-1">
-                {% if unit.unit_type == 'freezer' %} ❄️
-                {% elif unit.unit_type == 'refrigerator' %} 🧊
-                {% elif unit.unit_type == 'closet' %} 🗄️
-                {% elif unit.unit_type == 'cabinet' %} 🛞
-                {% elif unit.unit_type == 'pantry' %} 🍞
-                {% endif %}
-                {{ unit.get_unit_type_display }}
-              </h5>
-            </div>
-
-            <h6 class="fw-bold text-primary">{{ unit.name }}</h6>
-
-            {% if unit.temperature %}
-              <p class="text-muted mb-1">
-                <small>
-                  🌡️ {{ unit.temperature }} °C / {% widthratio unit.temperature 1 1.8 %|add:32|floatformat:1 }} °F
-                </small>
-              </p>
-            {% endif %}
-
-            {% if unit.notes %}
-              <p class="text-muted small mb-2 flex-grow-1">
-                {{ unit.notes|truncatechars:60 }}
-              </p>
-            {% else %}
-              <div class="flex-grow-1"></div> {# Spacer for consistent height #}
-            {% endif %}
-
-            <div>
-              <a href="{% url 'pantry:storage_unit_detail' unit.pk %}" class="btn btn-sm btn-outline-primary">
-                View Contents
-              </a>
-            </div>
-          </div>
+    <h2>{{ location.name }}</h2>
+    {% if location.address %}<p class="text-muted">{{ location.address }}</p>{% endif %}
+    <h3 class="mt-4">Storage Units</h3>
+    {% if storage_units %}
+        <div class="row g-3">
+            {% for unit in storage_units %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-light">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex align-items-center mb-2">
+                                <h5 class="mb-0 flex-grow-1">
+                                    {% if unit.unit_type == 'freezer' %}
+                                        ❄️
+                                    {% elif unit.unit_type ==
+                                        'refrigerator' %}
+                                        🧊
+                                    {% elif unit.unit_type == 'closet' %}
+                                        🗄️ {%
+                                        elif unit.unit_type == 'cabinet' %} 🛞
+                                    {% elif unit.unit_type ==
+                                        'pantry' %}
+                                        🍞
+                                    {% endif %}
+                                    {{ unit.get_unit_type_display }}
+                                </h5>
+                            </div>
+                            <h6 class="fw-bold text-primary">{{ unit.name }}</h6>
+                            {% if unit.temperature %}
+                                <p class="text-muted mb-1">
+                                    <small>
+                                        🌡️ {{ unit.temperature }} °C / {% widthratio unit.temperature 1 1.8
+                                        %|add:32|floatformat:1 }} °F
+                                    </small>
+                                </p>
+                            {% endif %}
+                            {% if unit.notes %}
+                                <p class="text-muted small mb-2 flex-grow-1">{{ unit.notes|truncatechars:60 }}</p>
+                            {% else %}
+                                <div class="flex-grow-1"></div>
+                                {# Spacer for consistent height #}
+                            {% endif %}
+                            <div>
+                                <a href="{% url 'pantry:storage_unit_detail' unit.pk %}"
+                                   class="btn btn-sm btn-outline-primary">View Contents</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-      </div>
-    {% endfor %}
-  </div>
-{% else %}
-  <p class="text-muted">No storage units defined yet.</p>
-{% endif %}
-
-<div class="mt-4">
-  <a href="{% url 'pantry:location_update' location.pk %}" class="btn btn-sm btn-secondary me-2">✏️ Edit Location</a>
-  <a href="{% url 'pantry:location_delete' location.pk %}" class="btn btn-sm btn-danger">🗑️ Delete</a>
-</div>
-
-<hr class="my-4">
-
-<a href="{% url 'pantry:location_list' %}" class="btn btn-link">← Back to All Locations</a>
-
-{% endblock %}   
+    {% else %}
+        <p class="text-muted">No storage units defined yet.</p>
+    {% endif %}
+    <div class="mt-4">
+        <a href="{% url 'pantry:location_update' location.pk %}"
+           class="btn btn-sm btn-secondary me-2">✏️ Edit Location</a>
+        <a href="{% url 'pantry:location_delete' location.pk %}"
+           class="btn btn-sm btn-danger">🗑️ Delete</a>
+    </div>
+    <hr class="my-4" />
+    <a href="{% url 'pantry:location_list' %}" class="btn btn-link">← Back to All Locations</a>
+{% endblock %}

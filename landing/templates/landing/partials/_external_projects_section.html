@@ -1,5 +1,4 @@
 <!-- landing/templates/landing/partials/_external_projects_section.html -->
-
 <!-- External projects Section -->
 <div class="content-section">
     <div class="container">
@@ -9,18 +8,18 @@
                     <div class="card-header-text">
                         <h3>{{ project.title }}</h3>
                         {% if project.display_domain %}
-                            <a href="{{ project.project_url }}" target="_blank" class="card-domain-link">{{ project.display_domain }}</a>
+                            <a href="{{ project.project_url }}"
+                               target="_blank"
+                               class="card-domain-link">{{ project.display_domain }}</a>
                         {% endif %}
                     </div>
                     <div class="card-image-frame">
-                        <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" />
                     </div>
                     <p>{{ project.description }}</p>
                     <div class="tech-stack-container">
                         <div class="tech-icons">
-                            {% for icon_class in project.get_tech_icons %}
-                                <i class="{{ icon_class }}"></i>
-                            {% endfor %}
+                            {% for icon_class in project.get_tech_icons %}<i class="{{ icon_class }}"></i>{% endfor %}
                         </div>
                         <p class="technologies-text">{{ project.technologies }}</p>
                     </div>

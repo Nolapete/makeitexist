@@ -1,29 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Tickets{% endblock %}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    <link rel="stylesheet" href="{% load static %}{% static 'tickets/css/tailwind.css' %}">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'tech-blue': '#1e40af',
-                        'tech-gray': '#374151',
-                    }
-                }
-            }
-        }
-    </script>
-</head>
-<body class="bg-gray-50 min-h-screen">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {% block content %}
-        {% endblock %}
-    </div>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>
+            {% block title %}Tickets{% endblock %}
+        </title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+        <link href="{% load static %}{% static 'tickets/css/tailwind.css' %}"
+              rel="stylesheet" />
+        <script>tailwind.config = {theme: {extend: {colors: {"tech-blue": "#1e40af","tech-gray": "#374151",},},},};</script>
+    </head>
+    <body class="bg-gray-50 min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
 </html>

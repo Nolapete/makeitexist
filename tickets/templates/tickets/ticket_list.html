@@ -1,44 +1,54 @@
 {% extends 'tickets/base_tickets.html' %}
 {% load static %}
-
-{% block title %}Your Tickets{% endblock %}
-
+{% block title
+    %}
+    Your Tickets
+{% endblock %}
 {% block content %}
-<div class="space-y-6">
-    <!-- Header -->
-    <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900">{{ request.user.username }}'s Tickets</h1>
-        <!-- Create New Ticket Button (Primary Outline Style) -->
-        <a href="{% url 'create_ticket' %}" class="flex items-center px-4 py-2 border border-blue-600 rounded-md shadow-sm text-sm font-medium text-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150">
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-            </svg>
-            Create New Ticket
-        </a>
-    </div>
-
-    <!-- Filter Section -->
-    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-        <div class="flex items-center space-x-4">
-            <label for="status-filter" class="text-sm font-medium text-gray-700">Filter by Status:</label>
-            <!-- Select input already has correct Tailwind classes -->
-            <select id="status-filter"
-                    class="block w-48 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    hx-get="{% url 'ticket_list' %}"
-                    hx-target="#ticket-container"
-                    hx-trigger="change"
-                    hx-include="this"
-                    name="status">
-                {% for value, label in status_choices %}
-                    <option value="{{ value }}" {% if value == current_status %}selected{% endif %}>{{ label }}</option>
-                {% endfor %}
-            </select>
+    <div class="space-y-6">
+        <!-- Header -->
+        <div class="flex items-center justify-between">
+            <h1 class="text-3xl font-bold text-gray-900">{{ request.user.username }}'s Tickets</h1>
+            <!-- Create New Ticket Button (Primary Outline Style) -->
+            <a href="{% url 'create_ticket' %}"
+               class="flex items-center px-4 py-2 border border-blue-600 rounded-md shadow-sm text-sm font-medium text-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150">
+                <svg class="w-5 h-5 mr-2"
+                     fill="none"
+                     stroke="currentColor"
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Create New Ticket
+            </a>
         </div>
+        <!-- Filter Section -->
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <div class="flex items-center space-x-4">
+                <label for="status-filter" class="text-sm font-medium text-gray-700">Filter by Status:</label>
+                <!-- Select input already has correct Tailwind classes -->
+                <select id="status-filter"
+                        class="block w-48 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        hx-get="{% url 'ticket_list' %}"
+                        hx-target="#ticket-container"
+                        hx-trigger="change"
+                        hx-include="this"
+                        name="status">
+                    {% for value, label in status_choices %}
+                        <option
+                            value="{{ value }}"
+                            {%
+                            if
+                            value=""
+                            ="current_status"
+                            %}selected{%
+                            endif
+                            %}
+                            >{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <!-- Tickets Container -->
+        <div id="ticket-container">{% include 'tickets/ticket_list_partial.html' %}</div>
     </div>
-
-    <!-- Tickets Container -->
-    <div id="ticket-container">
-        {% include 'tickets/ticket_list_partial.html' %}
-    </div>
-</div>
 {% endblock %}

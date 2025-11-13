@@ -1,71 +1,67 @@
 {% extends 'tickets/base_tickets.html' %}
 {% load static %}
-
-{% block title %}Update Ticket: {{ ticket.title }}{% endblock %}
-
+{% block title
+    %}
+    Update Ticket: {{ ticket.title }}
+{% endblock %}
 {% block content %}
-<div class="space-y-6">
-    <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900">Update Ticket: {{ ticket.title }}</h1>
-    </div>
-
-    <!-- Main Card Container -->
-    <div class="bg-white shadow-sm rounded-lg border border-gray-200">
-        <div class="px-6 py-4 border-b border-gray-200">
-            <h2 class="text-lg font-medium text-gray-900">Edit Ticket Information</h2>
+    <div class="space-y-6">
+        <div class="flex items-center justify-between">
+            <h1 class="text-3xl font-bold text-gray-900">Update Ticket: {{ ticket.title }}</h1>
         </div>
-        <form method="post" class="px-6 py-4 space-y-6">
-            {% csrf_token %}
-
-            <div>
-                <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
-                    Title
-                </label>
-                <!-- Form input styled in forms.py -->
-                {{ form.title }}
+        <!-- Main Card Container -->
+        <div class="bg-white shadow-sm rounded-lg border border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h2 class="text-lg font-medium text-gray-900">Edit Ticket Information</h2>
             </div>
-
-            <div>
-                <label for="{{ form.description.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
-                    Description
-                </label>
-                <!-- Form input styled in forms.py -->
-                {{ form.description }}
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form method="post" class="px-6 py-4 space-y-6">
+                {% csrf_token %}
                 <div>
-                    <label for="{{ form.priority.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
-                        Priority
-                    </label>
+                    <label for="{{ form.title.id_for_label }}"
+                           class="block text-sm font-medium text-gray-700 mb-2">Title</label>
                     <!-- Form input styled in forms.py -->
-                    {{ form.priority }}
+                    {{ form.title }}
                 </div>
-
                 <div>
-                    <label for="{{ form.status.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
-                        Status
-                    </label>
+                    <label for="{{ form.description.id_for_label }}"
+                           class="block text-sm font-medium text-gray-700 mb-2">Description</label>
                     <!-- Form input styled in forms.py -->
-                    {{ form.status }}
+                    {{ form.description }}
                 </div>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="flex space-x-3 pt-4">
-                <!-- Primary Button (Outline Style) -->
-                <button type="submit" class="flex items-center px-4 py-2 border border-blue-600 rounded-md shadow-sm text-sm font-medium text-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Update Ticket
-                </button>
-                <!-- Secondary Button (Outline Style) -->
-                <a href="{% url 'ticket_detail' ticket.pk %}" class="px-4 py-2 border border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-600 hover:bg-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150">
-                    Cancel
-                </a>
-            </div>
-        </form>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="{{ form.priority.id_for_label }}"
+                               class="block text-sm font-medium text-gray-700 mb-2">Priority</label>
+                        <!-- Form input styled in forms.py -->
+                        {{ form.priority }}
+                    </div>
+                    <div>
+                        <label for="{{ form.status.id_for_label }}"
+                               class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                        <!-- Form input styled in forms.py -->
+                        {{ form.status }}
+                    </div>
+                </div>
+                <!-- Action Buttons -->
+                <div class="flex space-x-3 pt-4">
+                    <!-- Primary Button (Outline Style) -->
+                    <button type="submit"
+                            class="flex items-center px-4 py-2 border border-blue-600 rounded-md shadow-sm text-sm font-medium text-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150">
+                        <svg class="w-4 h-4 mr-2"
+                             fill="none"
+                             stroke="currentColor"
+                             viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Update Ticket
+                    </button>
+                    <!-- Secondary Button (Outline Style) -->
+                    <a href="{% url 'ticket_detail' ticket.pk %}"
+                       class="px-4 py-2 border border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-600 hover:bg-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 {% endblock %}

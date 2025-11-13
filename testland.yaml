@@ -14,7 +14,8 @@
   pk: 2
   fields:
     title: St. Joseph Altar
-    description: Information about the traditions of St. Joseph Altars in the New
+    description:
+      Information about the traditions of St. Joseph Altars in the New
       Orleans area.  Listings of all known altars and route planning for the season.
     technologies: Django, PostgreSQL, HTML, CSS
     tech_icons: fas fa-code, fas fa-database, fab fa-html5, fab fa-css3
@@ -27,7 +28,8 @@
   pk: 3
   fields:
     title: Pantry Management
-    description: Pantry management to track inventory, restocking, and expiry.  Convenient
+    description:
+      Pantry management to track inventory, restocking, and expiry.  Convenient
       shopping list sent to your phone.
     technologies: Django, PostgreSQL, HTML, CSS
     tech_icons: fas fa-code, fas fa-database, fab fa-html5, fab fa-css3
@@ -40,7 +42,8 @@
   pk: 4
   fields:
     title: Tickets
-    description: Ticketing system that is more than just a todo list.  Inspired by
+    description:
+      Ticketing system that is more than just a todo list.  Inspired by
       Freshdesk and what we wished it did.
     technologies: Django, PostgreSQL, HTML, CSS
     tech_icons: fas fa-code, fas fa-database, fab fa-html5, fab fa-css3
@@ -78,12 +81,13 @@
   fields:
     name: Pete LoGiudice
     email: pete.logiudice@zohomail.com
-    phone: '5044328730'
+    phone: "5044328730"
     photo: staff_photos/P_LoGiudice_005_zcZYCGp.jpg
-    bio: 'Django enthusiast with a love for PostgreSQL.  Thoroughly enjoying the creative
+    bio:
+      "Django enthusiast with a love for PostgreSQL.  Thoroughly enjoying the creative
       magic of AI development. Leveraging 35+ years of experience in the technology
       arena, particularly in tech support, database programming, fund raising analytics
-      and reporting.  Designing apps that do what I wish other apps that I''ve used
+      and reporting.  Designing apps that do what I wish other apps that I've used
       would do.  Invigorated by the philosophy Elon Musk has demonstrated with SpaceX,
       Tesla, Boring Company, and his other ventures: Just make it exist.  You can
-      make it good later.'
+      make it good later."

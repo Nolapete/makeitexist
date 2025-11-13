@@ -1,26 +1,29 @@
 <!-- landing/templates/landing/partials/_staff_section.html -->
-
 <!-- Staff Cards Section -->
 <div class="content-section">
     <div class="container">
         <h2 class="domain-header">Our Team</h2>
         <div class="card-grid">
             {% for staff in staff_members %}
-            <div class="project-card staff-card">
-                {% if staff.photo %}
-                    <div class="card-image-frame staff-photo-frame">
-                        <img src="{{ staff.photo.url }}" alt="{{ staff.name }}">
+                <div class="project-card staff-card">
+                    {% if staff.photo %}
+                        <div class="card-image-frame staff-photo-frame">
+                            <img src="{{ staff.photo.url }}" alt="{{ staff.name }}" />
+                        </div>
+                    {% endif %}
+                    <h3>{{ staff.name }}</h3>
+                    <div class="staff-contact-info">
+                        <p class="staff-email">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:{{ staff.email }}">{{ staff.email }}</a>
+                        </p>
+                        <p class="staff-phone">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:{{ staff.phone }}">{{ staff.phone }}</a>
+                        </p>
                     </div>
-                {% endif %}
-                <h3>{{ staff.name }}</h3>
-                <div class="staff-contact-info">
-                    <p class="staff-email"><i class="fas fa-envelope"></i> <a href="mailto:{{ staff.email }}">{{ staff.email }}</a></p>
-                    <p class="staff-phone"><i class="fas fa-phone"></i> <a href="tel:{{ staff.phone }}">{{ staff.phone }}</a></p>
+                    {% if staff.bio %}<p class="staff-bio">{{ staff.bio }}</p>{% endif %}
                 </div>
-                {% if staff.bio %}
-                    <p class="staff-bio">{{ staff.bio }}</p>
-                {% endif %}
-            </div>
             {% empty %}
                 <p>No staff members to display.</p>
             {% endfor %}

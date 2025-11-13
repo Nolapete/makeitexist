@@ -16,7 +16,7 @@ jobs:
       - name: Deploy to Linode Server
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: 45.56.126.187
+          host: ${{ secrets.LINODE_IP_ADDRESS }}
           username: pete
           key: ${{ secrets.LINODE_SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.LINODE_SSH_PASSPHRASE }}

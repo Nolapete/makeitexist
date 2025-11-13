@@ -1,61 +1,48 @@
 {% extends "pantry/base.html" %}
-
 {% block title %}Create New Location{% endblock %}
-
 {% block content %}
-<h2>🏠 Create New Location</h2>
-
-<p class="text-muted">
-  A location can be your home, office, vacation cabin, etc. 
-  Each location can have multiple storage units (fridge, freezer, pantry, etc.).
-</p>
-
-{% if messages %}
-  {% for message in messages %}
-    <div class="alert alert-{{ message.tags|default:"info" }} alert-dismissible fade show" role="alert">
-      {{ message }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <h2>🏠 Create New Location</h2>
+    <p class="text-muted">
+        A location can be your home, office, vacation cabin, etc.
+        Each location can have multiple storage units (fridge, freezer, pantry, etc.).
+    </p>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags|default:"info" }} alert-dismissible fade show"
+                 role="alert">
+                {{ message }}
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <!-- Name Field -->
+        <div class="mb-3">
+            <label for="{{ form.name.id_for_label }}" class="form-label">Location Name *</label>
+            {{ form.name }}
+            {% if form.name.errors %}<div class="text-danger">{{ form.name.errors }}</div>{% endif %}
+            <div class="form-text">e.g., My Home, Downtown Office, Lake Cabin</div>
+        </div>
+        <!-- Address Field -->
+        <div class="mb-3">
+            <label for="{{ form.address.id_for_label }}" class="form-label">Address (Optional)</label>
+            {{ form.address }}
+            {% if form.address.errors %}<div class="text-danger">{{ form.address.errors }}</div>{% endif %}
+            <div class="form-text">Helpful for shared or remote locations.</div>
+        </div>
+        <!-- Submit Buttons -->
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success">Create Location</button>
+            <a href="{% url 'pantry:location_list' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+    <hr class="my-4">
+    <!-- Optional: Link to docs or help -->
+    <div class="text-center">
+        <small class="text-muted">Need multiple pantries? Create a location for each house or storage area.</small>
     </div>
-  {% endfor %}
-{% endif %}
-
-<form method="post">
-  {% csrf_token %}
-
-  <!-- Name Field -->
-  <div class="mb-3">
-    <label for="{{ form.name.id_for_label }}" class="form-label">Location Name *</label>
-    {{ form.name }}
-    {% if form.name.errors %}
-      <div class="text-danger">{{ form.name.errors }}</div>
-    {% endif %}
-    <div class="form-text">e.g., My Home, Downtown Office, Lake Cabin</div>
-  </div>
-
-  <!-- Address Field -->
-  <div class="mb-3">
-    <label for="{{ form.address.id_for_label }}" class="form-label">Address (Optional)</label>
-    {{ form.address }}
-    {% if form.address.errors %}
-      <div class="text-danger">{{ form.address.errors }}</div>
-    {% endif %}
-    <div class="form-text">Helpful for shared or remote locations.</div>
-  </div>
-
-  <!-- Submit Buttons -->
-  <div class="d-flex gap-2">
-    <button type="submit" class="btn btn-success">Create Location</button>
-    <a href="{% url 'pantry:location_list' %}" class="btn btn-secondary">Cancel</a>
-  </div>
-</form>
-
-<hr class="my-4">
-
-<!-- Optional: Link to docs or help -->
-<div class="text-center">
-  <small class="text-muted">
-    Need multiple pantries? Create a location for each house or storage area.
-  </small>
-</div>
-
-{% endblock %}   
+{% endblock %}

@@ -1,67 +1,64 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>makeitexist.net</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-</head>
-<body>
-
-    <!-- Parallax Section: Hero -->
-<div class="parallax-group parallax-1">
-    <img class="parallax-img" src="{% static 'images/make it good later.jpg' %}" alt="make it good later">
-    <div class="parallax-layer middle-layer"></div>
-    <div class="parallax-layer foreground-layer">
-        <h1>makeitexist.net</h1>
-        <p>Bringing your ideas to life. <br> "Just make it exist first. You can make it good later."</p>
-    </div>
-</div>
-
-    {% include 'landing/partials/_highlights_section.html' %}
-
-      <!-- Parallax Section 2 -->
-<div class="parallax-group parallax-2 short-parallax">
-    <div class="parallax-layer foreground-layer">
-        &nbsp;
-    </div>
-</div>
-
-    {% include 'landing/partials/_core_apps_section.html' %}
-
-   <!-- Parallax Section 2 -->
-<div class="parallax-group parallax-2 short-parallax">
-    <div class="parallax-layer foreground-layer">
-        <h2>Other Creative Projects</h2>
-    </div>
-</div>
-{% include 'landing/partials/_external_projects_section.html' %}
-
-    <!-- Parallax Section 3: Contact -->
-<div class="parallax-group parallax-3 short-parallax">
-    <div class="parallax-layer foreground-layer">
-        <h2>Let's collaborate.</h2>
-    </div>
-</div>
-{% include 'landing/partials/_staff_section.html' %}
-    <!-- Parallax Section 3: Contact -->
-<div class="parallax-group parallax-3 short-parallax">
-    <div class="parallax-layer foreground-layer">
-        &nbsp;
-    </div>
-</div>
-
-{% include 'landing/partials/_github_feed_section.html' %}
-
-<!-- Footer section -->
-<footer class="site-footer">
-    <div class="container">
-        <p>
-            Smoke texture by <a href="https://www.vecteezy.com/" target="_blank" rel="noopener noreferrer">Vecteezy</a>
-        </p>
-    </div>
-</footer>
-
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <title>makeitexist.net</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    </head>
+    <body>
+        <!-- Parallax Section: Hero -->
+        <div class="parallax-group parallax-1">
+            <img class="parallax-img"
+                 src="{% static 'images/make it good later.jpg' %}"
+                 alt="make it good later" />
+            <div class="parallax-layer middle-layer"></div>
+            <div class="parallax-layer foreground-layer">
+                <h1>makeitexist.net</h1>
+                <p>
+                    Bringing your ideas to life.
+                    <br />
+                    "Just make it exist first. You can make it good later."
+                </p>
+            </div>
+        </div>
+        {% include 'landing/partials/_highlights_section.html' %}
+        <!-- Parallax Section 2 -->
+        <div class="parallax-group parallax-2 short-parallax">
+            <div class="parallax-layer foreground-layer">&nbsp;</div>
+        </div>
+        {% include 'landing/partials/_core_apps_section.html' %}
+        <!-- Parallax Section 2 -->
+        <div class="parallax-group parallax-2 short-parallax">
+            <div class="parallax-layer foreground-layer">
+                <h2>Other Creative Projects</h2>
+            </div>
+        </div>
+        {% include 'landing/partials/_external_projects_section.html' %}
+        <!-- Parallax Section 3: Contact -->
+        <div class="parallax-group parallax-3 short-parallax">
+            <div class="parallax-layer foreground-layer">
+                <h2>Let's collaborate.</h2>
+            </div>
+        </div>
+        {% include 'landing/partials/_staff_section.html' %}
+        <!-- Parallax Section 3: Contact -->
+        <div class="parallax-group parallax-3 short-parallax">
+            <div class="parallax-layer foreground-layer">&nbsp;</div>
+        </div>
+        {% include 'landing/partials/_github_feed_section.html' %}
+        <!-- Footer section -->
+        <footer class="site-footer">
+            <div class="container">
+                <p>
+                    Smoke texture by
+                    <a href="https://www.vecteezy.com/"
+                       target="_blank"
+                       rel="noopener noreferrer">Vecteezy</a>
+                </p>
+            </div>
+        </footer>
+    </body>
 </html>

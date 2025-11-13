@@ -1,86 +1,91 @@
 {% extends "pantry/base.html" %}
-
 {% block title %}{{ unit.name }}{% endblock %}
-
 {% block content %}
-<h2>
-  {% if unit.unit_type == 'freezer' %} ❄️
-  {% elif unit.unit_type == 'refrigerator' %} 🧊
-  {% elif unit.unit_type == 'closet' %} 🗄️
-  {% elif unit.unit_type == 'cabinet' %} 🛞
-  {% elif unit.unit_type == 'pantry' %} 🍞
-  {% endif %}
-  {{ unit.get_unit_type_display }}: {{ unit.name }}
-</h2>
-
-<p>
-  <strong>Location:</strong>
-  <a href="{% url 'pantry:location_detail' unit.location.pk %}">{{ unit.location.name }}</a>
-</p>
-
-{% if unit.temperature %}
-  <p>
-    <strong>Temperature:</strong>
-    {{ unit.temperature }} °C /
-    {% widthratio unit.temperature 1 1.8 %|add:32|floatformat:1 }} °F
-  </p>
-{% else %}
-  <p class="text-muted"><em>No temperature set</em></p>
-{% endif %}
-
-{% if unit.notes %}
-  <p><strong>Notes:</strong> {{ unit.notes|linebreaksbr }}</p>
-{% endif %}
-
-<hr>
-
-<h3>Stored Items</h3>
-
-{% if stocks %}
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Item</th>
-        <th>Quantity</th>
-        <th>Expiry Date</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for stock in stocks %}
-        <tr>
-          <td>{{ stock.item.name }}</td>
-          <td>{{ stock.quantity }}</td>
-          <td>{{ stock.expiry_date|default:"—" }}</td>
-          <td>
-            {% if stock.is_expired %}
-              <span class="badge bg-danger">Expired</span>
-            {% elif stock.days_until_expiry <= 7 %}
-              <span class="badge bg-warning text-dark">Expires Soon</span>
-            {% else %}
-              <span class="badge bg-success">OK</span>
-            {% endif %}
-          </td>
-          <td>
-            <a href="{% url 'pantry:stock_edit' stock.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
-            <a href="{% url 'pantry:stock_delete' stock.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-{% else %}
-  <p class="text-muted">No items stored yet.</p>
-{% endif %}
-
-<div class="mt-3">
-  <!-- Pre-fill unit in stock add form -->
-  <a href="{% url 'pantry:stock_add' %}?unit={{ unit.pk }}" class="btn btn-success btn-sm">➕ Add Stock</a>
-  <a href="{% url 'pantry:storage_unit_update' unit.pk %}" class="btn btn-secondary btn-sm">Edit</a>
-  <a href="{% url 'pantry:storage_unit_delete' unit.pk %}" class="btn btn-danger btn-sm">Delete</a>
-</div>
-
-<a href="{% url 'pantry:location_detail' unit.location.pk %}" class="btn btn-link mt-3">← Back to {{ unit.location.name }}</a>
-
-{% endblock %}   
+    <h2>
+        {% if unit.unit_type == 'freezer' %}
+            ❄️
+        {% elif unit.unit_type ==
+            'refrigerator' %}
+            🧊
+        {% elif unit.unit_type == 'closet' %}
+            🗄️
+        {% elif
+            unit.unit_type == 'cabinet' %}
+            🛞
+        {% elif unit.unit_type == 'pantry' %}
+            🍞 {%
+            endif %} {{ unit.get_unit_type_display }}: {{ unit.name }}
+        </h2>
+        <p>
+            <strong>Location:</strong>
+            <a href="{% url 'pantry:location_detail' unit.location.pk %}">{{ unit.location.name }}</a>
+        </p>
+        {% if unit.temperature %}
+            <p>
+                <strong>Temperature:</strong>
+                {{ unit.temperature }} °C / {% widthratio unit.temperature 1 1.8
+                %|add:32|floatformat:1 }} °F
+            </p>
+        {% else %}
+            <p class="text-muted">
+                <em>No temperature set</em>
+            </p>
+        {% endif %}
+        {% if unit.notes %}
+            <p>
+                <strong>Notes:</strong> {{ unit.notes|linebreaksbr }}
+            </p>
+        {% endif %}
+        <hr />
+        <h3>Stored Items</h3>
+        {% if stocks %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Expiry Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stock in stocks %}
+                        <tr>
+                            <td>{{ stock.item.name }}</td>
+                            <td>{{ stock.quantity }}</td>
+                            <td>{{ stock.expiry_date|default:"—" }}</td>
+                            <td>
+                                {% if stock.is_expired %}
+                                    <span class="badge bg-danger">Expired</span>
+                                {% elif stock.days_until_expiry <= 7 %}
+                                    <span class="badge bg-warning text-dark">Expires Soon</span>
+                                {% else %}
+                                    <span class="badge bg-success">OK</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'pantry:stock_edit' stock.pk %}"
+                                   class="btn btn-sm btn-outline-primary">Edit</a>
+                                <a href="{% url 'pantry:stock_delete' stock.pk %}"
+                                   class="btn btn-sm btn-outline-danger">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="text-muted">No items stored yet.</p>
+        {% endif %}
+        <div class="mt-3">
+            <!-- Pre-fill unit in stock add form -->
+            <a href="{% url 'pantry:stock_add' %}?unit={{ unit.pk }}"
+               class="btn btn-success btn-sm">➕ Add Stock</a>
+            <a href="{% url 'pantry:storage_unit_update' unit.pk %}"
+               class="btn btn-secondary btn-sm">Edit</a>
+            <a href="{% url 'pantry:storage_unit_delete' unit.pk %}"
+               class="btn btn-danger btn-sm">Delete</a>
+        </div>
+        <a href="{% url 'pantry:location_detail' unit.location.pk %}"
+           class="btn btn-link mt-3">← Back to {{ unit.location.name }}</a>
+    {% endblock %}
