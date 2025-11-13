@@ -87,6 +87,8 @@ cffi==1.17.1
     #   aider-chat
     #   sounddevice
     #   soundfile
+cfgv==3.4.0
+    # via pre-commit
 charset-normalizer==3.4.2
     # via
     #   makeitexist (pyproject.toml)
@@ -131,6 +133,8 @@ diskcache==5.6.3
     # via
     #   makeitexist (pyproject.toml)
     #   aider-chat
+distlib==0.4.0
+    # via virtualenv
 distro==1.9.0
     # via
     #   makeitexist (pyproject.toml)
@@ -167,6 +171,7 @@ filelock==3.18.0
     #   makeitexist (pyproject.toml)
     #   aider-chat
     #   huggingface-hub
+    #   virtualenv
 flake8==7.3.0
     # via
     #   makeitexist (pyproject.toml)
@@ -280,6 +285,8 @@ huggingface-hub==0.34.3
     #   makeitexist (pyproject.toml)
     #   aider-chat
     #   tokenizers
+identify==2.6.15
+    # via pre-commit
 idna==3.10
     # via
     #   makeitexist (pyproject.toml)
@@ -384,6 +391,8 @@ networkx==3.4.2
     # via
     #   makeitexist (pyproject.toml)
     #   aider-chat
+nodeenv==1.9.1
+    # via pre-commit
 numpy==1.26.4
     # via
     #   makeitexist (pyproject.toml)
@@ -428,6 +437,7 @@ platformdirs==4.5.0
     # via
     #   makeitexist (pyproject.toml)
     #   black
+    #   virtualenv
 pluggy==1.6.0
     # via
     #   makeitexist (pyproject.toml)
@@ -436,6 +446,8 @@ posthog==6.4.1
     # via
     #   makeitexist (pyproject.toml)
     #   aider-chat
+pre-commit==4.4.0
+    # via makeitexist (pyproject.toml)
 prompt-toolkit==3.0.51
     # via
     #   makeitexist (pyproject.toml)
@@ -565,6 +577,7 @@ pyyaml==6.0.2
     #   aider-chat
     #   djlint
     #   huggingface-hub
+    #   pre-commit
 redis==7.0.1
     # via makeitexist (pyproject.toml)
 referencing==0.36.2
@@ -603,6 +616,8 @@ rsa==4.9.1
     #   makeitexist (pyproject.toml)
     #   aider-chat
     #   google-auth
+ruff==0.14.5
+    # via makeitexist (pyproject.toml)
 scipy==1.15.3
     # via
     #   makeitexist (pyproject.toml)
@@ -743,6 +758,8 @@ vine==5.1.0
     #   amqp
     #   celery
     #   kombu
+virtualenv==20.35.4
+    # via pre-commit
 watchfiles==1.1.0
     # via
     #   makeitexist (pyproject.toml)
