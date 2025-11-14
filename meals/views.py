@@ -49,7 +49,7 @@ def add_recipe(request):
             recipe.user = request.user
             recipe.save()
             form.save_m2m()
-            return redirect("recipes:my_recipes")
+            return redirect("meals:my_recipes")
     else:
         form = RecipeForm()
 
@@ -121,7 +121,7 @@ def choose_meal(request, pk):
         recipe.last_chosen = timezone.now().date()
         recipe.save()
         MealLog.objects.create(recipe=recipe, user=request.user)
-    return redirect("recipes:meal_suggestions")
+    return redirect("meals:meal_suggestions")
 
 
 @login_required
@@ -136,7 +136,7 @@ def edit_recipe(request, pk):
         form = RecipeForm(request.POST, instance=recipe)
         if form.is_valid():
             form.save()
-            return redirect("recipes:recipe_detail", pk=recipe.pk)
+            return redirect("meals:recipe_detail", pk=recipe.pk)
     else:
         form = RecipeForm(instance=recipe)
 
