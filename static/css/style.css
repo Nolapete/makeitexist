@@ -352,3 +352,14 @@ details[open] > summary::after {
 }
 
 /* --- END tickets app accordion CSS --- */
+
+
+/* Optional CSS to style the login box, you should move this to your style.css */
+.auth-form-container {
+    max-width: 500px;
+    margin: 100px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}

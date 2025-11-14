@@ -1,0 +1,22 @@
+{% extends 'meals/base.html' %}
+{% block content %}
+    <h2>Meal Suggestions for the Week</h2>
+    <div class="meal-suggestions">
+        {% for suggestion in suggestions %}
+            <div class="meal-card">
+                <h3>{{ suggestion.title }}</h3>
+                <p>{{ suggestion.description|truncatewords:30 }}</p>
+                <p>
+                    <em>Last chosen: {{ suggestion.last_chosen|default:"Never" }}</em>
+                </p>
+                <form action="{% url 'meals:choose_meal' suggestion.pk %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Choose this Meal</button>
+                </form>
+                <a href="{% url 'meals:recipe_detail' suggestion.pk %}">View Details</a>
+            </div>
+        {% empty %}
+            <p>No meals available for suggestion. Please add some recipes.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

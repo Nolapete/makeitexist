@@ -1,0 +1,95 @@
+{% extends "meals/base.html" %}
+{% load static %}
+{% block content %}
+    <div class="recipe-container">
+        <h2>Edit Recipe: "{{ recipe.title }}"</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="form-group">
+                {{ form.title.label_tag }}
+                {{ form.title }}
+            </div>
+            <div class="form-group">
+                {{ form.description.label_tag }}
+                {{ form.description }}
+            </div>
+            <div class="form-group">
+                {{ form.instructions.label_tag }}
+                {{ form.instructions }}
+            </div>
+            <div class="dual-listbox-container" style="display: flex; gap: 20px;">
+                <!-- Left Box (Available) -->
+                <div style="flex-grow: 1;">
+                    <h3>Available Ingredients</h3>
+                    <input type="search"
+                           placeholder="Filter..."
+                           onkeyup="filterOptions(this, 'available-ingredients')"
+                           class="filter-input">
+                    <select id="available-ingredients" multiple size="10" style="width: 100%;">
+                        {% include "meals/partials/ingredient_list.html" with ingredients=available_ingredients %}
+                    </select>
+                </div>
+                <!-- Buttons -->
+                <div style="display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            gap: 5px">
+                    <button type="button"
+                            onclick="moveSelected(document.getElementById('available-ingredients'), document.getElementById('selected-ingredients'))"
+                            style="padding: 10px">&gt;</button>
+                    <button type="button"
+                            onclick="moveSelected(document.getElementById('selected-ingredients'), document.getElementById('available-ingredients'))"
+                            style="padding: 10px">&lt;</button>
+                </div>
+                <!-- Right Box (Selected) -->
+                <div style="flex-grow: 1;">
+                    <h3>Selected Ingredients</h3>
+                    <input type="search"
+                           placeholder="Filter..."
+                           onkeyup="filterOptions(this, 'selected-ingredients')"
+                           class="filter-input">
+                    <select id="selected-ingredients"
+                            name="ingredients"
+                            multiple
+                            size="10"
+                            style="width: 100%">
+                        {% include "meals/partials/ingredient_list.html" with ingredients=selected_ingredients %}
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success" style="margin-top: 20px;">Save Details</button>
+        </form>
+    </div>
+    <script>
+    function moveSelected(source, target) {
+        Array.from(source.options).forEach(option => {
+            if (option.selected) {
+                target.appendChild(option);
+            }
+        });
+    }
+
+    function filterOptions(input, selectId) {
+        const filterText = input.value.toLowerCase();
+        const select = document.getElementById(selectId);
+        Array.from(select.options).forEach(option => {
+            if (option.text.toLowerCase().includes(filterText)) {
+                option.style.display = 'block';
+            } else {
+                option.style.display = 'none';
+            }
+        });
+    }
+
+    function prepareForSubmit() {
+        const selectedSelect = document.getElementById('selected-ingredients');
+        Array.from(selectedSelect.options).forEach(option => {
+            option.selected = true;
+        });
+    }
+
+    document.querySelector('form').addEventListener('submit', prepareForSubmit);
+    </script>
+{% endblock %}

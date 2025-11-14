@@ -17,9 +17,8 @@ urlpatterns = [
     path("pantry/", include("pantry.urls")),
     path("api/pantry/", include("pantry.api_urls")),
     path("recipes/", include("recipe.urls")),
-    path(
-        "accounts/", include("django.contrib.auth.urls")
-    ),  # For login, logout, password management
+    path("meals/", include("meals.urls")),
+    path("accounts/", include("allauth.urls")),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,15 @@
+{% extends 'meals/base.html' %}
+{% block content %}
+    <h1>Welcome to Meal Suggestions!</h1>
+    <p>Discover new meals, save your favorite recipes, and get personalized meal suggestions for the week.</p>
+    {% if user.is_authenticated %}
+        <p>
+            <a href="{% url 'meals:meal_suggestions' %}" class="btn">Get Meal Suggestions</a>
+        </p>
+    {% else %}
+        <p>
+            <a href="{% url 'account_login' %}?next={{ request.get_full_path }}">Login</a>
+            <a href="{% url 'meals:add_recipe' %}" class="btn">Add a recipe anonymously</a>.
+        </p>
+    {% endif %}
+{% endblock %}
