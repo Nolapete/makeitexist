@@ -51,6 +51,8 @@ attrs==25.3.0
     #   aiohttp
     #   jsonschema
     #   referencing
+babel==2.17.0
+    # via django-oscar
 backoff==2.2.1
     # via
     #   makeitexist (pyproject.toml)
@@ -72,7 +74,9 @@ cachetools==5.5.2
     #   aider-chat
     #   google-auth
 celery==5.5.3
-    # via makeitexist (pyproject.toml)
+    # via
+    #   makeitexist (pyproject.toml)
+    #   django-celery-results
 celery-types==0.23.0
     # via makeitexist (pyproject.toml)
 certifi==2025.8.3
@@ -86,6 +90,7 @@ cffi==1.17.1
     # via
     #   makeitexist (pyproject.toml)
     #   aider-chat
+    #   cryptography
     #   sounddevice
     #   soundfile
 cfgv==3.4.0
@@ -124,6 +129,8 @@ configargparse==1.7.1
     # via
     #   makeitexist (pyproject.toml)
     #   aider-chat
+cryptography==46.0.0
+    # via jwt
 cssbeautifier==1.15.4
     # via djlint
 diff-match-patch==20241021
@@ -147,17 +154,53 @@ django==5.2.6
     # via
     #   makeitexist (pyproject.toml)
     #   django-allauth
+    #   django-celery-results
+    #   django-debug-toolbar
+    #   django-extra-views
     #   django-filter
+    #   django-haystack
     #   django-htmx
+    #   django-ninja
+    #   django-oscar
+    #   django-phonenumber-field
+    #   django-tables2
+    #   django-treebeard
+    #   django-waffle
     #   djangorestframework
 django-allauth==65.13.0
     # via makeitexist (pyproject.toml)
+django-celery-results==2.6.0
+    # via makeitexist (pyproject.toml)
+django-crm==0.9.0
+    # via makeitexist (pyproject.toml)
+django-debug-toolbar==6.1.0
+    # via makeitexist (pyproject.toml)
 django-environ==0.12.0
     # via makeitexist (pyproject.toml)
+django-extra-views==0.16.0
+    # via django-oscar
 django-filter==25.1
     # via makeitexist (pyproject.toml)
+django-haystack==3.3.0
+    # via
+    #   makeitexist (pyproject.toml)
+    #   django-oscar
 django-htmx==1.26.0
     # via makeitexist (pyproject.toml)
+django-ninja==1.5.0
+    # via makeitexist (pyproject.toml)
+django-oscar==4.1
+    # via makeitexist (pyproject.toml)
+django-phonenumber-field==8.3.0
+    # via django-oscar
+django-tables2==2.7.0
+    # via django-oscar
+django-treebeard==4.7.1
+    # via django-oscar
+django-waffle==5.0.0
+    # via makeitexist (pyproject.toml)
+django-widget-tweaks==1.5.0
+    # via django-oscar
 djangorestframework==3.16.1
     # via makeitexist (pyproject.toml)
 djlint==1.36.4
@@ -170,6 +213,10 @@ editorconfig==0.17.1
     # via
     #   cssbeautifier
     #   jsbeautifier
+factory-boy==3.3.3
+    # via django-oscar
+faker==38.2.0
+    # via factory-boy
 filelock==3.18.0
     # via
     #   makeitexist (pyproject.toml)
@@ -342,6 +389,8 @@ jsonschema-specifications==2025.4.1
     #   makeitexist (pyproject.toml)
     #   aider-chat
     #   jsonschema
+jwt==1.4.0
+    # via makeitexist (pyproject.toml)
 kombu==5.5.4
     # via
     #   makeitexist (pyproject.toml)
@@ -417,6 +466,7 @@ packaging==25.0
     #   makeitexist (pyproject.toml)
     #   aider-chat
     #   black
+    #   django-haystack
     #   huggingface-hub
     #   kombu
     #   pytest
@@ -432,11 +482,14 @@ pexpect==4.9.0
     #   makeitexist (pyproject.toml)
     #   aider-chat
 phonenumbers==9.0.14
-    # via makeitexist (pyproject.toml)
+    # via
+    #   makeitexist (pyproject.toml)
+    #   django-oscar
 pillow==11.3.0
     # via
     #   makeitexist (pyproject.toml)
     #   aider-chat
+    #   django-oscar
 platformdirs==4.5.0
     # via
     #   makeitexist (pyproject.toml)
@@ -490,6 +543,8 @@ ptyprocess==0.7.0
     #   makeitexist (pyproject.toml)
     #   aider-chat
     #   pexpect
+purl==1.6
+    # via django-oscar
 pyasn1==0.6.1
     # via
     #   makeitexist (pyproject.toml)
@@ -516,6 +571,7 @@ pydantic==2.11.7
     #   makeitexist (pyproject.toml)
     #   aider-chat
     #   anthropic
+    #   django-ninja
     #   google-generativeai
     #   litellm
     #   openai
@@ -638,6 +694,7 @@ six==1.17.0
     #   jsbeautifier
     #   mixpanel
     #   posthog
+    #   purl
     #   python-dateutil
 smmap==5.0.2
     # via
@@ -655,6 +712,8 @@ socksio==1.0.0
     # via
     #   makeitexist (pyproject.toml)
     #   aider-chat
+sorl-thumbnail==12.11.0
+    # via makeitexist (pyproject.toml)
 sounddevice==0.5.2
     # via
     #   makeitexist (pyproject.toml)
@@ -672,6 +731,7 @@ sqlparse==0.5.3
     # via
     #   makeitexist (pyproject.toml)
     #   django
+    #   django-debug-toolbar
 tiktoken==0.10.0
     # via
     #   makeitexist (pyproject.toml)
@@ -740,6 +800,7 @@ typing-inspection==0.4.1
 tzdata==2025.2
     # via
     #   makeitexist (pyproject.toml)
+    #   faker
     #   kombu
 uritemplate==4.2.0
     # via
@@ -773,6 +834,8 @@ wcwidth==0.2.13
     #   makeitexist (pyproject.toml)
     #   aider-chat
     #   prompt-toolkit
+whoosh==2.7.4
+    # via makeitexist (pyproject.toml)
 yarl==1.20.1
     # via
     #   makeitexist (pyproject.toml)

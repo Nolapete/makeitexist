@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -20,7 +21,11 @@ urlpatterns = [
     path("recipes/", include("recipe.urls")),
     path("meals/", include("meals.urls")),
     path("accounts/", include("allauth.urls")),
-    re_path(r'^favicon\.ico$', RedirectView.as_view(url='/static/images/favicon.ico', permanent=True)),
+    re_path(
+        r"^favicon\.ico$",
+        RedirectView.as_view(url="/static/images/favicon.ico", permanent=True),
+    ),
+    path("shop/", include(apps.get_app_config("oscar").urls[0])),
 ]
 
 if settings.DEBUG:
@@ -28,7 +33,8 @@ if settings.DEBUG:
 
 if settings.DEBUG:
     import debug_toolbar
+
     # Append the debug toolbar URLs to the existing list
     urlpatterns += [
-        path('__debug__/', include(debug_toolbar.urls)),
+        path("__debug__/", include(debug_toolbar.urls)),
     ]
