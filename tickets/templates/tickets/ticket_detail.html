@@ -1,9 +1,6 @@
 {% extends 'tickets/base_tickets.html' %}
 {% load static %}
-{% block title %}
-    {{
-    ticket.title }}
-{% endblock %}
+{% block title %}{{ ticket.title }}{% endblock %}
 {% block content %}
     <div class="space-y-6">
         <!-- Header -->
@@ -63,7 +60,7 @@
         <!-- Actions -->
         <div class="flex flex-wrap gap-3">
             <!-- Back Button (Secondary Outline Style) -->
-            <a href="{% url 'ticket_list' %}"
+            <a href="{% url 'tickets:ticket_list' %}"
                class="flex items-center px-4 py-2 border border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-600 hover:bg-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150">
                 <svg class="w-4 h-4 mr-2"
                      fill="none"
@@ -74,7 +71,7 @@
                 Back to Ticket List
             </a>
             <!-- Edit Button (Warning Outline Style - Yellow/Amber) -->
-            <a href="{% url 'update_ticket' ticket.pk %}"
+            <a href="{% url 'tickets:update_ticket' ticket.pk %}"
                class="flex items-center px-4 py-2 border border-amber-600 rounded-md shadow-sm text-sm font-medium text-amber-600 hover:bg-amber-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition duration-150">
                 <svg class="w-4 h-4 mr-2"
                      fill="none"
@@ -87,7 +84,7 @@
             </a>
             <!-- Resolve Button (Success Outline Style - Green) -->
             {% if ticket.status != 'resolved' and ticket.status != 'closed' %}
-                <a href="{% url 'resolve_ticket' ticket.pk %}"
+                <a href="{% url 'tickets:resolve_ticket' ticket.pk %}"
                    class="flex items-center px-4 py-2 border border-green-600 rounded-md shadow-sm text-sm font-medium text-green-600 hover:bg-green-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150"
                    onclick="return confirm('Are you sure you want to resolve this ticket?')">
                     <svg class="w-4 h-4 mr-2"
@@ -101,7 +98,7 @@
             {% endif %}
             <!-- Close Button (Red Outline Style) -->
             {% if ticket.status != 'closed' %}
-                <a href="{% url 'close_ticket' ticket.pk %}"
+                <a href="{% url 'tickets:close_ticket' ticket.pk %}"
                    class="flex items-center px-4 py-2 border border-red-600 rounded-md shadow-sm text-sm font-medium text-red-600 hover:bg-red-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150"
                    onclick="return confirm('Are you sure you want to close this ticket?')">
                     <svg class="w-4 h-4 mr-2"
@@ -114,7 +111,7 @@
                 </a>
             {% endif %}
             <!-- Create New Button (Primary Outline Style - Blue) -->
-            <a href="{% url 'create_ticket' %}"
+            <a href="{% url 'tickets:create_ticket' %}"
                class="flex items-center px-4 py-2 border border-blue-600 rounded-md shadow-sm text-sm font-medium text-blue-600 hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150">
                 <svg class="w-4 h-4 mr-2"
                      fill="none"

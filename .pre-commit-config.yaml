@@ -22,9 +22,9 @@ repos:
 
   - repo: local
     hooks:
-      - id: pytest
-        name: pytest
-        entry: uv run pytest tests
+      - id: django-test
+        name: Django Unit Tests
+        entry: .venv/bin/python manage.py test
         language: system
         types: [python]
         pass_filenames: false

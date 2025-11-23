@@ -41,7 +41,15 @@ class StorageUnitForm(forms.ModelForm):
 class PantryItemForm(forms.ModelForm):
     class Meta:
         model = PantryItem
-        fields = ["name", "category", "barcode", "default_storage", "min_stock_level"]
+        fields = [
+            "name",
+            "category",
+            "barcode",
+            "default_storage",
+            "min_stock_level",
+            "min_stock_alert",
+            "expiry_alert_days",
+        ]
         widgets = {
             "name": forms.TextInput(attrs={"class": "form-control"}),
             "category": forms.Select(attrs={"class": "form-control"}),
@@ -50,6 +58,10 @@ class PantryItemForm(forms.ModelForm):
             ),
             "default_storage": forms.Select(attrs={"class": "form-control"}),
             "min_stock_level": forms.NumberInput(
+                attrs={"class": "form-control", "min": "1"}
+            ),
+            "min_stock_alert": forms.CheckboxInput(attrs={"class": "form-check-input"}),
+            "expiry_alert_days": forms.NumberInput(
                 attrs={"class": "form-control", "min": "1"}
             ),
         }

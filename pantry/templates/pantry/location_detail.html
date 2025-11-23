@@ -1,8 +1,5 @@
 {% extends "pantry/base.html" %}
-{% block title %}
-    {{ location.name }}
-{% endblock
-%}
+{% block title %}{{ location.name }}{% endblock %}
 {% block content %}
     <h2>{{ location.name }}</h2>
     {% if location.address %}<p class="text-muted">{{ location.address }}</p>{% endif %}
@@ -17,14 +14,13 @@
                                 <h5 class="mb-0 flex-grow-1">
                                     {% if unit.unit_type == 'freezer' %}
                                         ❄️
-                                    {% elif unit.unit_type ==
-                                        'refrigerator' %}
+                                    {% elif unit.unit_type == 'refrigerator' %}
                                         🧊
                                     {% elif unit.unit_type == 'closet' %}
-                                        🗄️ {%
-                                        elif unit.unit_type == 'cabinet' %} 🛞
-                                    {% elif unit.unit_type ==
-                                        'pantry' %}
+                                        🗄️
+                                    {% elif unit.unit_type == 'cabinet' %}
+                                        🛞
+                                    {% elif unit.unit_type == 'pantry' %}
                                         🍞
                                     {% endif %}
                                     {{ unit.get_unit_type_display }}
@@ -34,8 +30,8 @@
                             {% if unit.temperature %}
                                 <p class="text-muted mb-1">
                                     <small>
-                                        🌡️ {{ unit.temperature }} °C / {% widthratio unit.temperature 1 1.8
-                                        %|add:32|floatformat:1 }} °F
+                                        🌡️ {{ unit.temperature }} °C /
+                                        {% widthratio unit.temperature 1 1.8%|add:32|floatformat:1 }} °F %}
                                     </small>
                                 </p>
                             {% endif %}

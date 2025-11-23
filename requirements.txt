@@ -163,6 +163,8 @@ django==5.2.6
     #   django-ninja
     #   django-oscar
     #   django-phonenumber-field
+    #   django-stubs
+    #   django-stubs-ext
     #   django-tables2
     #   django-treebeard
     #   django-waffle
@@ -193,6 +195,10 @@ django-oscar==4.1
     # via makeitexist (pyproject.toml)
 django-phonenumber-field==8.3.0
     # via django-oscar
+django-stubs==5.2.7
+    # via makeitexist (pyproject.toml)
+django-stubs-ext==5.2.7
+    # via django-stubs
 django-tables2==2.7.0
     # via django-oscar
 django-treebeard==4.7.1
@@ -436,10 +442,13 @@ multidict==6.6.3
     #   aider-chat
     #   aiohttp
     #   yarl
+mypy==1.18.2
+    # via makeitexist (pyproject.toml)
 mypy-extensions==1.1.0
     # via
     #   makeitexist (pyproject.toml)
     #   black
+    #   mypy
 networkx==3.4.2
     # via
     #   makeitexist (pyproject.toml)
@@ -477,6 +486,7 @@ pathspec==0.12.1
     #   black
     #   djlint
     #   grep-ast
+    #   mypy
 pexpect==4.9.0
     # via
     #   makeitexist (pyproject.toml)
@@ -609,9 +619,7 @@ pyperclip==1.9.0
     #   makeitexist (pyproject.toml)
     #   aider-chat
 pytest==8.4.2
-    # via
-    #   makeitexist (pyproject.toml)
-    #   pytest-django
+    # via pytest-django
 pytest-django==4.11.1
     # via makeitexist (pyproject.toml)
 python-dateutil==2.9.0.post0
@@ -775,6 +783,8 @@ tree-sitter-yaml==0.7.1
     #   makeitexist (pyproject.toml)
     #   aider-chat
     #   tree-sitter-language-pack
+types-pyyaml==6.0.12.20250915
+    # via django-stubs
 typing-extensions==4.14.1
     # via
     #   makeitexist (pyproject.toml)
@@ -784,8 +794,11 @@ typing-extensions==4.14.1
     #   anyio
     #   beautifulsoup4
     #   celery-types
+    #   django-stubs
+    #   django-stubs-ext
     #   google-generativeai
     #   huggingface-hub
+    #   mypy
     #   openai
     #   posthog
     #   pydantic

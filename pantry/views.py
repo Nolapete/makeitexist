@@ -1,11 +1,13 @@
+import json
 from datetime import timedelta
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import F
-from django.http import JsonResponse
+from django.http import HttpRequest, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 
 from .forms import LocationForm, PantryItemForm, StorageUnitForm
 from .models import Location, PantryItem, Stock, StorageUnit
@@ -223,22 +225,19 @@ def storage_unit_delete(request, pk):
     return render(request, "pantry/storage_unit_confirm_delete.html", {"unit": unit})
 
 
-"""
 # --- Pantry Item Views ---
 @login_required
 def pantry_item_detail(request, pk):
     item = get_object_or_404(PantryItem, pk=pk)
     return render(request, "pantry/pantry_item_detail.html", {"item": item})
-"""
 
-"""
+
 @login_required
 def pantry_item_update(request, pk):
     # item = get_object_or_404(PantryItem, pk=pk)
     # Placeholder for form handling
     messages.info(request, "Edit item functionality coming soon.")
     return redirect("pantry:pantry_item_detail", pk=pk)
-"""
 
 
 # --- Stock Management ---
@@ -269,24 +268,32 @@ def stock_add(request):
         # Validate item
         if not item_pk:
             messages.error(request, "Item is required.")
-            return render_stock_add_form(request, None, None, quantity, expiry)
+            return render_stock_add_form(
+                request, item=None, unit=None, quantity=quantity, expiry=expiry
+            )
 
         try:
             item = get_object_or_404(PantryItem, pk=item_pk)
         except (ValueError, TypeError):
             messages.error(request, "Invalid item.")
-            return render_stock_add_form(request, None, unit, quantity, expiry)
+            return render_stock_add_form(
+                request, item=None, unit=unit, quantity=quantity, expiry=expiry
+            )
 
         # Validate unit
         if not unit_pk:
             messages.error(request, "Storage unit is required.")
-            return render_stock_add_form(request, item, None, quantity, expiry)
+            return render_stock_add_form(
+                request, item=item, unit=None, quantity=quantity, expiry=expiry
+            )
 
         try:
             unit = get_object_or_404(StorageUnit, pk=unit_pk)
         except (ValueError, TypeError):
             messages.error(request, "Invalid storage unit.")
-            return render_stock_add_form(request, item, None, quantity, expiry)
+            return render_stock_add_form(
+                request, item=item, unit=None, quantity=quantity, expiry=expiry
+            )
 
         # Validate quantity
         try:
@@ -297,14 +304,16 @@ def stock_add(request):
             messages.error(request, "Please enter a valid quantity.")
             return render_stock_add_form(request, item, unit, quantity, expiry)
 
-        # Create stock
-        """
         stock = Stock.objects.create(
             item=item, storage_unit=unit, quantity=quantity, expiry_date=expiry or None
-        )"""
+        )
 
         messages.success(
-            request, f"✅ Added {quantity} of '{item.name}' to '{unit.name}'."
+            request,
+            (
+                f"✅ Added {stock.quantity} of '{stock.item.name}' "
+                f"to '{stock.storage_unit.name}'."
+            ),
         )
         return redirect("pantry:storage_unit_detail", pk=unit.pk)
 
@@ -369,13 +378,17 @@ def stock_delete(request, pk):
     return render(request, "pantry/stock_confirm_delete.html", {"stock": stock})
 
 
-"""
 # --- Barcode Scanning (Web UI) ---
 @login_required
-def barcode_scan(request):
-    # Simple page to simulate or handle barcode scanning
+def barcode_scan(request: HttpRequest):
     scanned_barcode = request.GET.get("barcode", "").strip()
-    context = {"scanned_barcode": None, "item": None, "error": None}
+
+    # Explicitly define the types allowed in the context dictionary
+    context: dict[str, str | PantryItem | None] = {
+        "scanned_barcode": None,
+        "item": None,
+        "error": None,
+    }
 
     if scanned_barcode:
         try:
@@ -388,11 +401,10 @@ def barcode_scan(request):
 
 
 # --- API Endpoint: Barcode Scan (for mobile app) ---
-"""
 
-"""
-@csrf_exempt
+
 @login_required
+@csrf_exempt
 def api_barcode_scan(request):
     # API endpoint to handle barcode scan from mobile app
     if request.method == "POST":
@@ -418,8 +430,9 @@ def api_barcode_scan(request):
                                 {
                                     "id": item.default_storage.id,
                                     "name": item.default_storage.name,
-                                    "type": item
-                                            .default_storage.get_unit_type_display(),
+                                    "type": (
+                                        item.default_storage.get_unit_type_display()
+                                    ),
                                     "location": item.default_storage.location.name,
                                 }
                                 if item.default_storage
@@ -438,8 +451,6 @@ def api_barcode_scan(request):
             return JsonResponse({"error": "Invalid JSON"}, status=400)
 
     return JsonResponse({"error": "POST request required"}, status=405)
-
-"""
 
 
 @login_required

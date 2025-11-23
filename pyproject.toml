@@ -44,6 +44,7 @@ dependencies = [
     "django-htmx==1.26.0",
     "django-ninja>=1.5.0",
     "django-oscar>=4.1",
+    "django-stubs>=5.2.7",
     "django-waffle>=5.0.0",
     "djangorestframework==3.16.1",
     "djlint>=1.36.4",
@@ -90,6 +91,7 @@ dependencies = [
     "mixpanel==4.10.1",
     "mslex==1.3.0",
     "multidict==6.6.3",
+    "mypy>=1.18.2",
     "mypy-extensions==1.1.0",
     "networkx==3.4.2",
     "numpy==1.26.4",
@@ -123,7 +125,6 @@ dependencies = [
     "pypandoc==1.15",
     "pyparsing==3.2.3",
     "pyperclip==1.9.0",
-    "pytest==8.4.2",
     "pytest-django==4.11.1",
     "python-dateutil==2.9.0.post0",
     "python-decouple==3.8",
@@ -181,9 +182,12 @@ line-length = 88
 select = ["E", "W", "F", "I", "UP", "B", "C4", "DJ", "S"]
 
 # Ignore rules related to missing documentation strings (D-codes from pydocstyle)
-ignore = ["D100", "D101", "D102", "D103", "D104", "F403", "S101"]
+ignore = ["D100", "D101", "D102", "D103", "D104", "F403", "F811", "F841", "S101"]
 
 [tool.ruff.format]
 # Consistent formatting style: double quotes and spaces
 quote-style = "double"
 indent-style = "space"
+
+[tool.djlint]
+ignore = "H001,H002,T001,T002"

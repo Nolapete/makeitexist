@@ -1,0 +1,85 @@
+{% extends 'pantry/base.html' %}
+{% block title %}{{ item.name }} Details{% endblock %}
+{% block content %}
+    <div class="max-w-4xl mx-auto space-y-8">
+        <div class="flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-gray-900">{{ item.name }}</h1>
+            <div class="flex space-x-3">
+                <a href="{% url 'pantry:pantry_item_update' pk=item.pk %}"
+                   class="px-4 py-2 border border-blue-600 rounded-md text-blue-600 hover:bg-blue-600 hover:text-white transition duration-150">
+                    Edit Item
+                </a>
+                <!-- Assuming a stock add URL exists -->
+                <a href="{% url 'pantry:stock_add' item=item.pk %}"
+                   class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition duration-150">
+                    Add Stock
+                </a>
+            </div>
+        </div>
+        <!-- Details Section -->
+        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+            <div class="px-4 py-5 sm:p-0">
+                <dl class="sm:divide-y sm:divide-gray-200">
+                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Category</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            {{ item.category.name|default:"N/A" }}
+                        </dd>
+                    </div>
+                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Barcode</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            {{ item.barcode|default:"N/A" }}
+                        </dd>
+                    </div>
+                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Min Stock Level</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            {{ item.min_stock_level }}
+                        </dd>
+                    </div>
+                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">Default Storage</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            {{ item.default_storage|default:"None assigned" }}
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+        <!-- Current Stock Levels -->
+        <h2 class="text-2xl font-semibold text-gray-900 mt-8">Current Stock Batches</h2>
+        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+            {% if item.stocks.all %}
+                <ul class="divide-y divide-gray-200">
+                    {% for stock_instance in item.stocks.all %}
+                        <li class="px-6 py-4 flex justify-between items-center">
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">
+                                    {{ stock_instance.storage_unit.name }}
+                                    {% if stock_instance.is_expired %}
+                                        <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                            Expired
+                                        </span>
+                                    {% elif stock_instance.days_until_expiry <= item.expiry_alert_days and stock_instance.days_until_expiry is not None %}
+                                        <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                            Expiring Soon ({{ stock_instance.days_until_expiry }} days)
+                                        </span>
+                                    {% endif %}
+                                </p>
+                                <p class="text-sm text-gray-500">
+                                    Qty: {{ stock_instance.quantity }} |
+                                    Purchased: {{ stock_instance.purchase_date|date:"M d, Y" }} |
+                                    Expires: {{ stock_instance.expiry_date|default:"N/A" }}
+                                </p>
+                            </div>
+                            <!-- Add action buttons for stock management here if needed -->
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="px-6 py-4 text-gray-500">No stock found for this item.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

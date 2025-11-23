@@ -99,4 +99,5 @@ uwsgi.ini
 *.sublime-project
 *.sublime-workspace
 .direnv/
-.direnv/
+.idea/
+.idea/*.xml

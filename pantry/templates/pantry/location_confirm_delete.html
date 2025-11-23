@@ -1,0 +1,30 @@
+{% extends 'pantry/base.html' %}
+{% block title %}Confirm Delete Location{% endblock %}
+{% block content %}
+    <div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold text-gray-900 mb-4">Confirm Deletion</h1>
+        <p class="text-gray-600 mb-6">
+            Are you sure you want to delete the location:
+            <strong class="text-red-600">{{ location.name }}</strong>?
+        </p>
+        <p class="text-sm text-red-700 bg-red-100 border-l-4 border-red-500 p-4 mb-6">
+            <span class="font-bold">Warning:</span> This action is permanent. All associated storage units will also be deleted.
+        </p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="flex justify-between items-center">
+                <!-- Cancel Button -->
+                <!-- We assume a URL 'pantry:location_detail' exists -->
+                <a href="{% url 'pantry:location_detail' pk=location.pk %}"
+                   class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-150">
+                    Cancel
+                </a>
+                <!-- Submit Button (Delete Action) -->
+                <button type="submit"
+                        class="px-4 py-2 bg-red-600 text-white rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150">
+                    Yes, delete this location
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
