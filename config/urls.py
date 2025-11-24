@@ -14,12 +14,12 @@ admin.site.index_title = "Make It Exist Admin Portal"
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", landing_page, name="landing"),
-    path("blog/", include("blog.urls")),
-    path("tickets/", include("tickets.urls")),
-    path("pantry/", include("pantry.urls")),
+    path("blog/", include("blog.urls", namespace="blog")),
+    path("tickets/", include("tickets.urls", namespace="tickets")),
+    path("pantry/", include("pantry.urls", namespace="pantry")),
     path("api/pantry/", include("pantry.api_urls")),
-    path("recipes/", include("recipe.urls")),
-    path("meals/", include("meals.urls")),
+    path("recipes/", include("recipe.urls", namespace="recipes")),
+    path("meals/", include("meals.urls", namespace="meals")),
     path("accounts/", include("allauth.urls")),
     re_path(
         r"^favicon\.ico$",

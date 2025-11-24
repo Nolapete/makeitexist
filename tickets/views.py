@@ -53,7 +53,7 @@ def create_ticket(request):
             ticket = form.save(commit=False)
             ticket.created_by = request.user
             ticket.save()
-            return redirect("ticket_list")
+            return redirect("tickets:ticket_list")
     else:
         form = TicketForm()
     return render(request, "tickets/create_ticket.html", {"form": form})
@@ -72,7 +72,7 @@ def update_ticket(request, pk):
         form = TicketUpdateForm(request.POST, instance=ticket)
         if form.is_valid():
             form.save()
-            return redirect("ticket_detail", pk=ticket.pk)
+            return redirect("tickets:ticket_detail", pk=ticket.pk)
     else:
         form = TicketUpdateForm(instance=ticket)
     return render(
@@ -85,7 +85,7 @@ def resolve_ticket(request, pk):
     ticket = get_object_or_404(Ticket, pk=pk, created_by=request.user)
     ticket.status = "resolved"
     ticket.save()
-    return redirect("ticket_detail", pk=ticket.pk)
+    return redirect("tickets:ticket_detail", pk=ticket.pk)
 
 
 @login_required
@@ -93,4 +93,4 @@ def close_ticket(request, pk):
     ticket = get_object_or_404(Ticket, pk=pk, created_by=request.user)
     ticket.status = "closed"
     ticket.save()
-    return redirect("ticket_detail", pk=ticket.pk)
+    return redirect("tickets:ticket_detail", pk=ticket.pk)
