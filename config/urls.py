@@ -25,7 +25,7 @@ urlpatterns = [
         r"^favicon\.ico$",
         RedirectView.as_view(url="/static/images/favicon.ico", permanent=True),
     ),
-    path("shop/", include(apps.get_app_config("oscar").urls[0])),
+    path("store/", include(apps.get_app_config("oscar").urls[0])),
 ]
 
 if settings.DEBUG:

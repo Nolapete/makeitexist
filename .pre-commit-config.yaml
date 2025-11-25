@@ -42,3 +42,13 @@ repos:
             "--quiet",
           ]
         files: ^pyproject\.toml$
+
+  - repo: local
+    hooks:
+      - id: coderabbit-review
+        name: CodeRabbit AI Review
+        entry: coderabbit review --plain --type uncommitted
+        language: system
+        pass_filenames: false
+        # stage: commit # optional, default is 'commit'
+        # files: \.(py|js|ts|css|html)$ # optional regex to limit file types
